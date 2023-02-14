@@ -1,4 +1,5 @@
 <?php
+include "connect.php";
 session_start();
 if (isset($_SESSION['name'])) {
     ?>
@@ -36,45 +37,32 @@ if (isset($_SESSION['name'])) {
             <div class="row bg-secondary py-1 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
-                        <a class="text-body mr-3" href="">About Us</a>
-
-
                     </div>
                 </div>
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My
-                                Account</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">Sign in</button>
-                                <button class="dropdown-item" type="button">Sign up</button>
-                            </div>
-                        </div>
+
                         <div class="btn-group mx-2">
                             <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift
                                 Voucher</button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button">Gift Voucher</button>
-                                <button class="dropdown-item" type="button">Gift Box</button>
 
                             </div>
                         </div>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle"
-                                data-toggle="dropdown">Exchangeable</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">If you are not satisfied, you can exchange
-                                    it</button>
-                            </div>
-                        </div>
-                        <p>" "</p><a href="./logout.php">
+
+
+                        <a href="./logout.php" style="padding-left:10px">
                             <div class="btn-group">
                                 <button class="btn btn-sm btn-light">LOG OUT</button>
                             </div>
                         </a>
 
-
+                        <p style="font-size: 16px; margin: 0;padding:0 10px 0 10px;color:black">
+                            <?php echo $_SESSION['name'] ?>
+                        </p>
+                        <img src="images/testuser.jpg" alt="Profile Picture"
+                            style="width: 50px; height: 50px; border-radius: 50%;">
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -98,16 +86,7 @@ if (isset($_SESSION['name'])) {
                     </a>
                 </div>
                 <div class="col-lg-4 col-6 text-left">
-                    <form action="">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for products">
-                            <div class="input-group-append">
-                                <span class="input-group-text bg-transparent text-primary">
-                                    <i class="fa fa-search"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </form>
+
                 </div>
                 <div class="col-lg-4 col-6 text-right">
                     <p class="m-0">Customer Service</p>
@@ -122,30 +101,24 @@ if (isset($_SESSION['name'])) {
         <div class="container-fluid bg-dark mb-30">
             <div class="row px-xl-5">
                 <div class="col-lg-3 d-none d-lg-block">
-                    <a class="btn d-flex align-items-center justify-content-between bg-secondary w-100"
-                        data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                        <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
-                        <i class="fa fa-angle-down text-dark"></i>
+                    <a class="btn d-flex align-items-center justify-content-between  w-100" data-toggle="collapse"
+                        href="#navbar-vertical" style="height: 50px; padding: 0 30px;">
+                        <h6 class="text-light m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
+                        <i class="fa fa-angle-down text-light"></i>
                     </a>
                     <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
                         id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                         <div class="navbar-nav w-100">
-                            <div class="nav-item dropdown dropright">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i
-                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-
-                                    <a href="" class="dropdown-item">Girl's wear</a>
-                                    <a href="" class="dropdown-item">Kid's Wear</a>
-                                </div>
-                            </div>
-                            <a href="" class="nav-item nav-link">T-shirts</a>
-                            <a href="" class="nav-item nav-link">Skirts</a>
-                            <a href="" class="nav-item nav-link">Bloues</a>
-                            <a href="" class="nav-item nav-link">Tops</a>
-                            <a href="" class="nav-item nav-link">Trousers</a>
-                            <a href="" class="nav-item nav-link">Lehenga</a>
-
+                            <?php
+                            $result = mysqli_query($conn, "SELECT * FROM `category`"); // Assuming that $conn is the database connection
+                        
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<a href="" class="nav-item nav-link pl-3">' . $row["category_name"] . '</a>';
+                                }
+                            } else {
+                                echo "0 results";
+                            } ?>
                         </div>
                     </nav>
                 </div>
@@ -162,23 +135,13 @@ if (isset($_SESSION['name'])) {
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="index.php" class="nav-item nav-link active">Home</a>
                                 <a href="shop.php" class="nav-item nav-link">Shop</a>
-                                <a href="detail.php" class="nav-item nav-link">Shop Detail</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i
-                                            class="fa fa-angle-down mt-1"></i></a>
-                                    <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                        <a href="cart.php" class="dropdown-item">Shopping Cart</a>
-                                        <a href="checkout.php" class="dropdown-item">Checkout</a>
-                                    </div>
-                                </div>
+                                <a href="cart.php" class="nav-item nav-link">Shopping Cart</a>
+                                <a href="checkout.php" class="nav-item nav-link">Checkout</a>
+
                                 <a href="contact.php" class="nav-item nav-link">Contact</a>
                             </div>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                                <a href="" class="btn px-0">
-                                    <i class="fas fa-heart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle"
-                                        style="padding-bottom: 2px;">0</span>
-                                </a>
+
                                 <a href="" class="btn px-0 ml-3">
                                     <i class="fas fa-shopping-cart text-primary"></i>
                                     <span class="badge text-secondary border border-secondary rounded-circle"
@@ -205,7 +168,8 @@ if (isset($_SESSION['name'])) {
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item position-relative active" style="height: 430px;">
-                                <img class="position-absolute w-100 h-100" src="images/bg-1.jpg" style="object-fit: cover;">
+                                <img class="position-absolute w-100 h-100" src="images/frock2.jpg"
+                                    style="object-fit: cover;">
                                 <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                     <div class="p-3" style="max-width: 700px;">
                                         <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">GLAMO
@@ -233,7 +197,8 @@ if (isset($_SESSION['name'])) {
                                 </div>
                             </div>
                             <div class="carousel-item position-relative" style="height: 430px;">
-                                <img class="position-absolute w-100 h-100" src="images/kids.jpg" style="object-fit: cover;">
+                                <img class="position-absolute w-100 h-100" src="images/kidgirl.jpg"
+                                    style="object-fit: cover;">
                                 <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                     <div class="p-3" style="max-width: 700px;">
                                         <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">KID'S
@@ -313,403 +278,38 @@ if (isset($_SESSION['name'])) {
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
                     class="bg-secondary pr-3">Categories</span></h2>
             <div class="row px-xl-5 pb-3">
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/frocks.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Girl's Frocks</h6>
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM `category`"); // Assuming that $conn is the database connection
+            
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                            <a class="text-decoration-none" href="">
+                                <div class="cat-item d-flex align-items-center mb-4">
 
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/t-shirts.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Girl's T-Shirts</h6>
+                                    <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                                        <img class="img-fluid" src=<?php echo 'images/' . $row["image"] ?> alt="">
+                                    </div>
+                                    <div class="flex-fill pl-3">
+                                        <h6>
+                                            <?php echo $row["category_name"]; ?>
+                                        </h6>
 
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/skirt.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Girl's Skirts</h6>
+                                    </div>
 
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/Bloues.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Girl's Blouses</h6>
 
-                            </div>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/tops.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Girl's Tops</h6>
+                    <?php
+                    }
+                } else {
+                    echo "0 results";
+                } ?>
 
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/Trousesrs.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Girl's Trousers</h6>
-
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/lehenga.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Girl's Lehenga</h6>
-
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/ja.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6> Girl's Jackets</h6>
-
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/kids f.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Kid's Frocks </h6>
-
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/KT.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Kid's T-Shirt</h6>
-
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/KB.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Kid's Blouses</h6>
-
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/kid.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Kid's Skirts</h6>
-
-                            </div>
-                        </div>
-                    </a>
-                </div>
             </div>
         </div>
         <!-- Categories End -->
-
-
-
-        <!-- Products Start -->
-        <div class="container-fluid pt-5 pb-3">
-            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Featured
-                    Products</span></h2>
-            <div class="row px-xl-5">
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/bs1.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">FRILIED MINI DRESS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 2200</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/bs2.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">PRINTED MINI DRESS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 1190</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/bs3.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">SIDE SLIT MIDI DRESS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 2200</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/bs4.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">SIDE SLIT MIDI DRESS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 2200</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/bs5.jpg.jpeg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">SHORT SLEEVE MINI DRESS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 1690</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/bs6.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">PINK CHERRY BLOSSOM DRESS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 3500</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/bs7.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">COOL CUTE DRESS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 800</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/bs8.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">LILY PRINTED FROCK</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 900</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <!-- Products End -->
 
 
         <!-- Offer Start -->
@@ -741,6 +341,8 @@ if (isset($_SESSION['name'])) {
 
 
         <!-- Products Start -->
+
+        <!-- Query for get latest five -->
         <div class="container-fluid pt-5 pb-3">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">NEW
                     ARRIVALS</span></h2>
@@ -748,16 +350,20 @@ if (isset($_SESSION['name'])) {
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/na1.jpg" alt="">
+                            <img class="img-fluid w-100" src="images/frock4.jpg" alt="">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                                <a class="btn btn-outline-dark btn-square m-2" href=""><i
+                                        class="fa fa-shopping-cart"></i></a>
+                                <div class="container">
+                                    <input type="button" onclick="decrementValue(2)" value="-" />
+                                    <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="2" />
+                                    <input type="button" onclick="incrementValue(2)" value="+" />
+                                </div>
+
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">BABY BLUE DRESS</a>
+                            <a class="h6 text-decoration-none text-truncate" href="">Yellow DRESS</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <h5>LKR 1800</h5>
                                 <h6 class="text-muted ml-2"><del></del></h6>
@@ -776,186 +382,22 @@ if (isset($_SESSION['name'])) {
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/na2.jpg" alt="">
+                            <img class="img-fluid w-100" src="images/frock3.jpg" alt="">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                                <a class="btn btn-outline-dark btn-square m-2" href=""><i
+                                        class="fa fa-shopping-cart"></i></a>
+                                <div class="container">
+                                    <input type="button" onclick="decrementValue(1)" value="-" />
+                                    <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="1" />
+                                    <input type="button" onclick="incrementValue(1)" value="+" />
+                                </div>
+
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">FRILL TOP</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 1200</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/na3.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">YELLOW FLORAL SKIRT</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 1100</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/na4.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">SIDE SLIT MIDI DRESS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 2200</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/na5.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">WHITE & BLUE MIX CHERRY BLOSSOM TOP</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 1300</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/na6.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">BABY PINK SLEEVLESS DRESS</a>
+                            <a class="h6 text-decoration-none text-truncate" href="">Yellow DRESS</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <h5>LKR 1800</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/na7.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">BUBBLES WHITE TOP</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 800</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/na8.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href=""> PINAPO SYKBLUE DRESS FOR KIDS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 950</h5>
                                 <h6 class="text-muted ml-2"><del></del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
@@ -970,6 +412,7 @@ if (isset($_SESSION['name'])) {
                     </div>
                 </div>
             </div>
+
         </div>
 
 
@@ -986,29 +429,12 @@ if (isset($_SESSION['name'])) {
                 <div class="col">
                     <div class="owl-carousel vendor-carousel">
                         <div class="bg-light p-4">
-                            <img src="img/vr1.jpg" alt="">
+                            <img src="images/frock3.jpg" alt="">
                         </div>
                         <div class="bg-light p-4">
-                            <img src="img/vr2.jpg" alt="">
+                            <img src="images/frock1.jpg" alt="">
                         </div>
-                        <div class="bg-light p-4">
-                            <img src="img/vr3.jpg" alt="">
-                        </div>
-                        <div class="bg-light p-4">
-                            <img src="img/vr4.jpg" alt="">
-                        </div>
-                        <div class="bg-light p-4">
-                            <img src="img/vr5.jpg" alt="">
-                        </div>
-                        <div class="bg-light p-4">
-                            <img src="img/vr6.jpg" alt="">
-                        </div>
-                        <div class="bg-light p-4">
-                            <img src="img/vr7.jpg" alt="">
-                        </div>
-                        <div class="bg-light p-4">
-                            <img src="img/vr8.jpg" alt="">
-                        </div>
+
 
                     </div>
                 </div>
@@ -1033,8 +459,7 @@ if (isset($_SESSION['name'])) {
                             <div class="d-flex flex-column justify-content-start">
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop
-                                    Detail</a>
+
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
@@ -1046,8 +471,7 @@ if (isset($_SESSION['name'])) {
                             <div class="d-flex flex-column justify-content-start">
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop
-                                    Detail</a>
+
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
@@ -1108,6 +532,25 @@ if (isset($_SESSION['name'])) {
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
     </body>
+    <script type="text/javascript">
+        function incrementValue(id) {
+            var value = parseInt(document.getElementById(id).value, 10);
+            value = isNaN(value) ? 0 : value;
+            if (value < 10) {
+                value++;
+                document.getElementById(id).value = value;
+            }
+        }
+        function decrementValue() {
+            var value = parseInt(document.getElementById(id).value, 10);
+            value = isNaN(value) ? 0 : value;
+            if (value > 1) {
+                value--;
+                document.getElementById(id).value = value;
+            }
+
+        }
+    </script>
 
     </html>
 <?php
