@@ -53,7 +53,13 @@ error_reporting(0);
 										$row = mysqli_fetch_assoc($res);
 										session_start();
 										$_SESSION['name'] = $row['name'];
-										header("location:index.php");
+										if ($row['type'] == 'admin') {
+											header("location:adminhome.php");
+
+										} else {
+											header("location:index.php");
+
+										}
 									} else {
 										echo "<h4>Password or Email is wrong</h4>";
 									}
@@ -78,7 +84,7 @@ error_reporting(0);
 
 
 						</form>
-						<h3 class="mb-4 text-center">New customer? Create your account</h3>
+						<h6 class="mb-4 text-center">New customer? Create your account</h6>
 						<div class="form-group">
 							<a href='./register.php'> <button class="form-control btn btn-primary px-3">Sign Up</button>
 							</a>
