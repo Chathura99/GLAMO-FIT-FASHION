@@ -61,8 +61,9 @@ if (isset($_SESSION['name'])) {
                         <p style="font-size: 16px; margin: 0;padding:0 10px 0 10px;color:black">
                             <?php echo $_SESSION['name'] ?>
                         </p>
+                        <a href="profile.php">
                         <img src="images/testuser.jpg" alt="Profile Picture"
-                            style="width: 50px; height: 50px; border-radius: 50%;">
+                            style="width: 50px; height: 50px; border-radius: 50%;"></a>
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -175,10 +176,12 @@ if (isset($_SESSION['name'])) {
         <!-- Checkout Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
-                <div class="col-lg-8">
+            <div class="col-lg-8"><h1>Table</h1>
+                        </div>
+                <!-- <div class="col-lg-8">
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing
                             Address</span></h5>
-                    <div class="bg-light p-30 mb-5">
+                    <div class="bg-dark p-30 mb-5 p-4">
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label>First Name</label>
@@ -243,7 +246,7 @@ if (isset($_SESSION['name'])) {
                     <div class="collapse mb-5" id="shipping-address">
                         <h5 class="section-title position-relative text-uppercase mb-3"><span
                                 class="bg-secondary pr-3">Shipping Address</span></h5>
-                        <div class="p-30">
+                        <div class="p-30 ">
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label>First Name</label>
@@ -293,11 +296,11 @@ if (isset($_SESSION['name'])) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-lg-4">
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order
                             Total</span></h5>
-                    <div class="bg-light p-30 mb-5">
+                    <div class="bg-dark p-30 mb-5  p-4">
                         <div class="border-bottom">
                             <h6 class="mb-3">Products</h6>
                             <div class="d-flex justify-content-between">
@@ -316,24 +319,24 @@ if (isset($_SESSION['name'])) {
                         <div class="border-bottom pt-3 pb-2">
                             <div class="d-flex justify-content-between mb-3">
                                 <h6>Subtotal</h6>
-                                <h6></h6>
+                                <h6>LKR XXXX</h6>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <h6 class="font-weight-medium">Shipping</h6>
-                                <h6 class="font-weight-medium"></h6>
+                                <h6 class="font-weight-medium">LKR XXX</h6>
                             </div>
                         </div>
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Total</h5>
-                                <h5></h5>
+                                <h5>LKR XXXX</h5>
                             </div>
                         </div>
                     </div>
                     <div class="mb-5">
                         <h5 class="section-title position-relative text-uppercase mb-3"><span
                                 class="bg-secondary pr-3">Payment</span></h5>
-                        <div class="bg-light p-30">
+                        <div class="bg-dark p-30  p-4">
                             <div class="form-group">
                                 <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" name="payment" id="paypal">

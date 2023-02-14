@@ -61,8 +61,9 @@ if (isset($_SESSION['name'])) {
                         <p style="font-size: 16px; margin: 0;padding:0 10px 0 10px;color:black">
                             <?php echo $_SESSION['name'] ?>
                         </p>
+                        <a href="profile.php">
                         <img src="images/testuser.jpg" alt="Profile Picture"
-                            style="width: 50px; height: 50px; border-radius: 50%;">
+                            style="width: 50px; height: 50px; border-radius: 50%;"></a>
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">

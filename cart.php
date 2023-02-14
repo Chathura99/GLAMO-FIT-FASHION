@@ -61,8 +61,9 @@ if (isset($_SESSION['name'])) {
                         <p style="font-size: 16px; margin: 0;padding:0 10px 0 10px;color:black">
                             <?php echo $_SESSION['name'] ?>
                         </p>
+                        <a href="profile.php">
                         <img src="images/testuser.jpg" alt="Profile Picture"
-                            style="width: 50px; height: 50px; border-radius: 50%;">
+                            style="width: 50px; height: 50px; border-radius: 50%;"></a>
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -221,7 +222,7 @@ if (isset($_SESSION['name'])) {
                     </form>
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
                             Summary</span></h5>
-                    <div class="bg-light p-5 mb-5">
+                    <div class="bg-dark p-5 mb-5">
                         <div class="border-bottom pb-2">
                             <div class="d-flex justify-content-between mb-3">
                                 <h6>Subtotal</h6>
