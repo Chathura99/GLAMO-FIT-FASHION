@@ -48,7 +48,9 @@ if (isset($_SESSION['name'])) {
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Telephone" name='phone' required>
                             </div>
-
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="NIC" name='nic' required>
+                            </div>
                             <div class="form-group">
                                 <input id="password-field" type="password" class="form-control" placeholder="Password"
                                     name='password' required>
@@ -68,6 +70,7 @@ if (isset($_SESSION['name'])) {
                                 $cpassword = md5($_POST['cpassword']);
                                 $email = $_POST['email'];
                                 $phone = $_POST['phone'];
+                                $nic = $_POST['nic'];
                                 if (!$conn) {
                                     echo "Server error!";
                                 } else {
@@ -79,7 +82,12 @@ if (isset($_SESSION['name'])) {
                                         if ($password == $cpassword) {
                                             $sql1 = "Insert into users (name,email,password,date,telephone) values ('$name','$email','$password','2023-02-12','$phone')";
                                             $res1 = mysqli_query($conn, $sql1);
-                                            if ($res1) {
+                                            // get user id
+                                            $userdata = mysqli_query($conn, "select * from users where email='$email'")->fetch_assoc();
+                                            $userId = $userdata['id'];
+                                            $sql2 = "Insert into customer (user_id,nic) values ('$userId','$nic')";
+                                            $res2 = mysqli_query($conn, $sql2);
+                                            if ($res1 && $res2) {
                                                 echo "<h5>Registration Successfull</h5>";
                                             } else {
                                                 echo "<h5>Something went wrong!</h5>";
@@ -98,11 +106,11 @@ if (isset($_SESSION['name'])) {
 
                             </div>
                         </form>
-                        <h3 class="mb-4 text-center">Login your account</h3>
-						<div class="form-group">
-							<a href='./login.php'> <button class="form-control btn btn-primary px-3">Sign In</button>
-							</a>
-						</div>
+                        <h6 class="mb-4 text-center">Login your account</h6>
+                        <div class="form-group">
+                            <a href='./login.php'> <button class="form-control btn btn-primary px-3">Sign In</button>
+                            </a>
+                        </div>
 
                     </div>
 
