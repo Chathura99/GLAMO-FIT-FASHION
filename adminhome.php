@@ -51,8 +51,8 @@ if (isset($_SESSION['name'])) {
                             <?php echo $_SESSION['name'] ?>
                         </p>
                         <a href="profile.php">
-                        <img src="images/testuser.jpg" alt="Profile Picture"
-                            style="width: 50px; height: 50px; border-radius: 50%;"></a>
+                            <img src="images/testuser.jpg" alt="Profile Picture"
+                                style="width: 50px; height: 50px; border-radius: 50%;"></a>
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -196,13 +196,13 @@ if (isset($_SESSION['name'])) {
                         </div>
                     </div>
                     <!-- <div class="product-offer mb-30" style="height: 200px;">
-                        <img class="img-fluid" src="img/offer 02.jpg" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase">Save 20%</h6>
-                            <h3 class="text-white mb-3">Special Offer</h3>
-                            <a href="" class="btn btn-primary">Shop Now</a>
-                        </div>
-                    </div> -->
+                                                                                    <img class="img-fluid" src="img/offer 02.jpg" alt="">
+                                                                                    <div class="offer-text">
+                                                                                        <h6 class="text-white text-uppercase">Save 20%</h6>
+                                                                                        <h3 class="text-white mb-3">Special Offer</h3>
+                                                                                        <a href="" class="btn btn-primary">Shop Now</a>
+                                                                                    </div>
+                                                                                </div> -->
                 </div>
             </div>
         </div>
@@ -241,12 +241,85 @@ if (isset($_SESSION['name'])) {
         <!-- Featured End -->
 
 
+
         <!-- Categories Start -->
         <div class="container-fluid pt-5">
-            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><button type="button" class="btn btn-secondary btn-lg p-2 mr-2" style="font-size:75px">+</button><span
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
                     class="bg-secondary pr-3">Categories</span>
-</h2>
-                                   
+            </h2>
+            <div class="col-lg-8 ml-5">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Add
+                        Category</span></h5>
+                <form class="signin-form" method='POST' enctype="multipart/form-data">
+                    <div class="bg-dark p-30 mb-5 p-4">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Category Name</label>
+                                <input class="form-control" type="text" placeholder="" name='name'>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Category Description</label>
+                                <input class="form-control" type="text" placeholder="" name='description'>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Image</label>
+                                <input class="form-control" type="file" placeholder="" name='image'>
+                            </div>
+                        </div>
+                        <?php
+                        if (isset($_POST['addCategory'])) {
+                            $name = $_POST['name'];
+                            $des = $_POST['description'];
+                            $img = $_FILES["image"]["name"];
+                            if (!$conn) {
+                                echo "Server error!";
+                            } else {
+
+                                if ($name != '' && $des != '') {
+                                    $sql1 = "Insert into category (category_name,description,image) values ('$name','$des','$img')";
+                                    $res1 = mysqli_query($conn, $sql1);
+                                    if ($res1) {
+                                        echo "<h5>Added Successfull</h5>";
+                                    }
+
+                                } else {
+                                    echo "<h5>Something went wrong!</h5>";
+
+                                }
+
+                            }
+                        }
+                        ?>
+                        <?php
+                        // print($_FILES['image']);
+                        if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+                            // The file was uploaded successfully
+                            $target_dir = "images/"; // Change this to the path of your target directory
+                            $target_file = $target_dir . basename($_FILES["image"]["name"]);
+                            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+                            // Check if the file is an image
+                            $check = getimagesize($_FILES["image"]["tmp_name"]);
+                            if ($check !== false) {
+                                // Move the uploaded file to the target directory
+                                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                                    echo "The file " . htmlspecialchars(basename($_FILES["image"]["name"])) . " has been uploaded.";
+                                } else {
+                                    echo "Sorry, there was an error uploading your file.";
+                                }
+                            } else {
+                                echo "File is not an image.";
+                            }
+                        }
+                        ?>
+                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='addCategory'>ADD</button>
+                    </div>
+                </form>
+                <div class="collapse mb-5" id="shipping-address">
+
+                </div>
+            </div>
+
             <div class="row px-xl-5 pb-3">
                 <?php
                 $result = mysqli_query($conn, "SELECT * FROM `category`"); // Assuming that $conn is the database connection
@@ -257,13 +330,16 @@ if (isset($_SESSION['name'])) {
                             <a class="text-decoration-none" href="">
                                 <div class="cat-item d-flex align-items-center mb-4 bg-light">
 
-                                    <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                                    <div class="overflow-hidden" style="width: 300px; height: 100px;">
                                         <img class="img-fluid" src=<?php echo 'images/' . $row["image"] ?> alt="">
                                     </div>
                                     <div class="flex-fill pl-3">
-                                        <h6 style='color:black'>
+                                        <h6 class='pt-2' style='color:black'>
                                             <?php echo $row["category_name"]; ?>
                                         </h6>
+                                        <p style='font-size:10px'>
+                                            <?php echo $row["description"]; ?>
+                                        </p>
 
                                     </div>
 
@@ -314,73 +390,161 @@ if (isset($_SESSION['name'])) {
 
         <!-- Query for get latest five -->
         <div class="container-fluid pt-5 pb-3">
-            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><button type="button" class="btn btn-secondary btn-lg p-2 mr-2" style="font-size:75px">+</button><span class="bg-secondary pr-3">NEW
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">NEW
                     ARRIVALS</span></h2>
+            <div class="col-lg-8 ml-5">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Add
+                        New Items</span></h5>
+                <form class="signin-form" method='POST' enctype="multipart/form-data">
+                    <div class="bg-dark p-30 mb-5 p-4">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Item Name</label>
+                                <input class="form-control" type="text" placeholder="" name='name'>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Category</label>
+                                <select class="custom-select" name='catId'>
+                                    <?php
+                                    $result = mysqli_query($conn, "SELECT * FROM `category`"); // Assuming that $conn is the database connection
+                                
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) { ?>
+                                            <option value=<?php echo $row["category_id"]; ?>>
+                                                <?php echo $row["category_name"]; ?>
+                                            </option>
+                                            <?php
+                                        }
+                                    } else {
+                                        echo "0 results";
+                                    } ?>
+
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Item Description</label>
+                                <input class="form-control" type="text" placeholder="" name='description'>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Quantity</label>
+                                <input class="form-control" type="text" placeholder="" name='quantity'>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Price(1 unit)</label>
+                                <input class="form-control" type="text" placeholder="" name='price'>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Image</label>
+                                <input class="form-control" type="file" placeholder="" name='image1'>
+                            </div>
+
+                        </div>
+                        <?php
+                        if (isset($_POST['addItem'])) {
+                            $catId = $_POST['catId'];
+                            $name = $_POST['name'];
+                            $des = $_POST['description'];
+                            $price = $_POST['price'];
+                            $quantity = $_POST['quantity'];
+                            $img = $_FILES["image1"]["name"];
+                            if (!$conn) {
+                                echo "Server error!";
+                            } else {
+
+                                if ($name != '' && $des != '' && $price != '' && $quantity != '' && $catId != '') {
+                                    $sql1 = "Insert into product (category_id,description,image,price,name,quantity) values ('$catId','$des','$img','$price','$name','$quantity')";
+                                    // print_r($sql1);
+                                    $res1 = mysqli_query($conn, $sql1);
+                                    if ($res1) {
+                                        echo "<h5>Added Successfull</h5>";
+                                    }
+
+                                } else {
+                                    echo "<h5>Something went wrong!</h5>";
+
+                                }
+
+                            }
+                        }
+                        ?>
+                        <?php
+                        // print($_FILES['image']);
+                        if (isset($_FILES['image1']) && $_FILES['image1']['error'] == UPLOAD_ERR_OK) {
+                            // The file was uploaded successfully
+                            $target_dir = "images/"; // Change this to the path of your target directory
+                            $target_file = $target_dir . basename($_FILES["image1"]["name"]);
+                            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+                            // Check if the file is an image
+                            $check = getimagesize($_FILES["image1"]["tmp_name"]);
+                            if ($check !== false) {
+                                // Move the uploaded file to the target directory
+                                if (move_uploaded_file($_FILES["image1"]["tmp_name"], $target_file)) {
+                                    echo "The file " . htmlspecialchars(basename($_FILES["image1"]["name"])) . " has been uploaded.";
+                                } else {
+                                    echo "Sorry, there was an error uploading your file.";
+                                }
+                            } else {
+                                echo "File is not an image.";
+                            }
+                        }
+                        ?>
+                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='addItem'>ADD</button>
+                    </div>
+                </form>
+                <div class="collapse mb-5" id="shipping-address">
+
+                </div>
+            </div>
             <div class="row px-xl-5">
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="images/frock4.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square m-2" href=""><i
-                                        class="fa fa-shopping-cart"></i></a>
-                                <div class="container">
-                                    <input type="button" onclick="decrementValue(2)" value="-" />
-                                    <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="2" />
-                                    <input type="button" onclick="incrementValue(2)" value="+" />
-                                </div>
+      
 
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Yellow DRESS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 1800</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="images/frock3.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square m-2" href=""><i
-                                        class="fa fa-shopping-cart"></i></a>
-                                <div class="container">
-                                    <input type="button" onclick="decrementValue(1)" value="-" />
-                                    <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="1" />
-                                    <input type="button" onclick="incrementValue(1)" value="+" />
-                                </div>
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM `product`"); // Assuming that $conn is the database connection
+            
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                            <div class="product-item bg-light mb-4">
+                                <div class="product-img position-relative overflow-hidden">
+                                    <img class="img-fluid w-100" src=<?php echo "images/".$row['image'] ?> alt="">
+                                    <div class="product-action"><h6 class='p-3'>Available - <?php echo $row['quantity'] ?></h6>
+                                        <a class="btn btn-outline-dark btn-square m-2" href=""><i
+                                                class="fa fa-shopping-cart"></i></a>
+                                                
+                                        <div class="container">
+                                            <input type="button" onclick="decrementValue(1)" value="-" />
+                                            <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="1" />
+                                            <input type="button" onclick="incrementValue(1)" value="+" />
+                                        </div>
 
+                                    </div>
+                                </div>
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-truncate" href="">
+                                        <?php echo $row['name'] ?>
+                                    </a>
+                                    <p> <?php echo $row['description'] ?></p>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h5><?php echo 'LKR'.' '.$row['price'] ?></h5>
+                                        <h6 class="text-muted ml-2"><del></del></h6>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center mb-1">
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small></small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Yellow DRESS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 1800</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <?php
+                    }
+                } else {
+                    echo "0 results";
+                } ?>
             </div>
 
         </div>
