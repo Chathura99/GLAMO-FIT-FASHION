@@ -62,9 +62,9 @@ if (isset($_SESSION['name'])) {
                             <?php echo $_SESSION['name'] ?>
                         </p>
                         <a href="profile.php">
-                        <a href="profile.php">
-                        <img src="images/testuser.jpg" alt="Profile Picture"
-                            style="width: 50px; height: 50px; border-radius: 50%;"></a></a>
+                            <a href="profile.php">
+                                <img src="images/testuser.jpg" alt="Profile Picture"
+                                    style="width: 50px; height: 50px; border-radius: 50%;"></a></a>
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -138,7 +138,7 @@ if (isset($_SESSION['name'])) {
                                 <a href="index.php" class="nav-item nav-link active">Home</a>
                                 <a href="shop.php" class="nav-item nav-link">Shop</a>
                                 <a href="cart.php" class="nav-item nav-link">Shopping Cart</a>
-                                <a href="checkout.php" class="nav-item nav-link">Checkout</a>
+                                <a href="checkout.php" class="nav-item nav-link">Order</a>
 
                                 <a href="contact.php" class="nav-item nav-link">Contact</a>
                             </div>
@@ -285,7 +285,7 @@ if (isset($_SESSION['name'])) {
             
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) { ?>
-                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1 bg-dark">
                             <a class="text-decoration-none" href="">
                                 <div class="cat-item d-flex align-items-center mb-4">
 
@@ -349,70 +349,65 @@ if (isset($_SESSION['name'])) {
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">NEW
                     ARRIVALS</span></h2>
             <div class="row px-xl-5">
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="images/frock4.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square m-2" href=""><i
-                                        class="fa fa-shopping-cart"></i></a>
-                                <div class="container">
-                                    <input type="button" onclick="decrementValue(2)" value="-" />
-                                    <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="2" />
-                                    <input type="button" onclick="incrementValue(2)" value="+" />
-                                </div>
 
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Yellow DRESS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 1800</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="images/frock3.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square m-2" href=""><i
-                                        class="fa fa-shopping-cart"></i></a>
-                                <div class="container">
-                                    <input type="button" onclick="decrementValue(1)" value="-" />
-                                    <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="1" />
-                                    <input type="button" onclick="incrementValue(1)" value="+" />
-                                </div>
 
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM `product`"); 
+                // limit latest 5
+            
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                            <div class="product-item bg-light mb-4">
+                                <div class="product-img position-relative overflow-hidden">
+                                    <img class="img-fluid w-100" src=<?php echo "images/" . $row['image'] ?> alt="">
+                                    <div class="product-action">
+                                        <h6 class='p-3'>Available -
+                                            <?php echo $row['quantity'] ?>
+                                        </h6>
+                                        <a class="btn btn-outline-dark btn-square m-2" href=""><i
+                                                class="fa fa-shopping-cart"></i></a>
+
+                                        <div class="container">
+                                            <input type="button" onclick="decrementValue(<?php echo $row['product_id'] ?>)"
+                                                value="-" />
+                                            <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id=<?php
+                                            echo $row['product_id'] ?> />
+                                            <input type="button" onclick="incrementValue(<?php echo $row['product_id'] ?>)"
+                                                value="+" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-truncate" href="">
+                                        <?php echo $row['product_name'] ?>
+                                    </a>
+                                    <p>
+                                        <?php echo $row['description'] ?>
+                                    </p>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h5>
+                                            <?php echo 'LKR' . ' ' . $row['price'] ?>
+                                        </h5>
+                                        <h6 class="text-muted ml-2"><del></del></h6>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center mb-1">
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small></small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Yellow DRESS</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>LKR 1800</h5>
-                                <h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small class=></small>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <?php
+                    }
+                } else {
+                    echo "0 results";
+                } ?>
             </div>
 
         </div>
@@ -464,7 +459,7 @@ if (isset($_SESSION['name'])) {
 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
@@ -476,7 +471,7 @@ if (isset($_SESSION['name'])) {
 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
@@ -543,7 +538,7 @@ if (isset($_SESSION['name'])) {
                 document.getElementById(id).value = value;
             }
         }
-        function decrementValue() {
+        function decrementValue(id) {
             var value = parseInt(document.getElementById(id).value, 10);
             value = isNaN(value) ? 0 : value;
             if (value > 1) {

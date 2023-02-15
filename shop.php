@@ -137,7 +137,7 @@ if (isset($_SESSION['name'])) {
                                 <a href="index.php" class="nav-item nav-link ">Home</a>
                                 <a href="shop.php" class="nav-item nav-link active">Shop</a>
                                 <a href="cart.php" class="nav-item nav-link">Shopping Cart</a>
-                                <a href="checkout.php" class="nav-item nav-link">Checkout</a>
+                                <a href="checkout.php" class="nav-item nav-link">Order</a>
 
                                 <a href="contact.php" class="nav-item nav-link">Contact</a>
                             </div>
@@ -323,28 +323,51 @@ if (isset($_SESSION['name'])) {
                 <div class="col-lg-9 col-md-8">
                     <div class="row pb-3">
 
-                        <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                        <!-- Query for get latest five -->
+        <div class="container-fluid pt-5 pb-3">
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Search Products</span></h2>
+            <div class="row px-xl-5">
+
+
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM `product`"); 
+                // search by price, category, size
+            
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                             <div class="product-item bg-light mb-4">
                                 <div class="product-img position-relative overflow-hidden">
-                                    <img class="img-fluid w-100"
-                                        src="https://github.com/Chathura99/the-branded-shop/blob/master/public/images/arrivals/arrivals4.png?raw=true"
-                                        alt="" style="height:400px; width: 200px">
+                                    <img class="img-fluid w-100" src=<?php echo "images/" . $row['image'] ?> alt="">
                                     <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square m-2" href=""><i
-                                        class="fa fa-shopping-cart"></i></a>
-                                <div class="container">
-                                    <input type="button" onclick="decrementValue(1)" value="-" />
-                                    <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="1" />
-                                    <input type="button" onclick="incrementValue(1)" value="+" />
-                                </div>
+                                        <h6 class='p-3'>Available -
+                                            <?php echo $row['quantity'] ?>
+                                        </h6>
+                                        <a class="btn btn-outline-dark btn-square m-2" href=""><i
+                                                class="fa fa-shopping-cart"></i></a>
+
+                                        <div class="container">
+                                            <input type="button" onclick="decrementValue(<?php echo $row['product_id'] ?>)"
+                                                value="-" />
+                                            <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id=<?php
+                                            echo $row['product_id'] ?> />
+                                            <input type="button" onclick="incrementValue(<?php echo $row['product_id'] ?>)"
+                                                value="+" />
+                                        </div>
 
                                     </div>
                                 </div>
                                 <div class="text-center py-4">
-                                    <a class="h6 text-decoration-none text-truncate" href="">SUNSHINE YELLOW BUTTERFULY
-                                        FROCK</a>
+                                    <a class="h6 text-decoration-none text-truncate" href="">
+                                        <?php echo $row['product_name'] ?>
+                                    </a>
+                                    <p>
+                                        <?php echo $row['description'] ?>
+                                    </p>
                                     <div class="d-flex align-items-center justify-content-center mt-2">
-                                        <h5>LKR 2000</h5>
+                                        <h5>
+                                            <?php echo 'LKR' . ' ' . $row['price'] ?>
+                                        </h5>
                                         <h6 class="text-muted ml-2"><del></del></h6>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center mb-1">
@@ -358,39 +381,14 @@ if (isset($_SESSION['name'])) {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                            <div class="product-item bg-light mb-4">
-                                <div class="product-img position-relative overflow-hidden">
-                                    <img class="img-fluid w-100" src='images/frock3.jpg' alt=""
-                                        style="height:400px; width: 200px">
-                                    <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square m-2" href=""><i
-                                        class="fa fa-shopping-cart"></i></a>
-                                <div class="container">
-                                    <input type="button" onclick="decrementValue(2)" value="-" />
-                                    <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="2" />
-                                    <input type="button" onclick="incrementValue(2)" value="+" />
-                                </div>
+                    <?php
+                    }
+                } else {
+                    echo "0 results";
+                } ?>
+            </div>
 
-                                    </div>
-                                </div>
-                                <div class="text-center py-4">
-                                    <a class="h6 text-decoration-none text-truncate" href="">PINK BUTTERFULY MINI DRESS</a>
-                                    <div class="d-flex align-items-center justify-content-center mt-2">
-                                        <h5>LKR 1850</h5>
-                                        <h6 class="text-muted ml-2"><del></del></h6>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-center mb-1">
-                                        <small class=></small>
-                                        <small class=></small>
-                                        <small class=></small>
-                                        <small class=></small>
-                                        <small class=></small>
-                                        <small></small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        </div>
 
 
 
@@ -433,7 +431,7 @@ if (isset($_SESSION['name'])) {
 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
@@ -445,7 +443,7 @@ if (isset($_SESSION['name'])) {
 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>

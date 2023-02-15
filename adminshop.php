@@ -50,7 +50,7 @@ if (isset($_SESSION['name'])) {
                         <p style="font-size: 16px; margin: 0;padding:0 10px 0 10px;color:black">
                             <?php echo $_SESSION['name'] ?>
                         </p>
-                        <a href="profile.php">
+                        <a href="adminprofile.php">
                         <img src="images/testuser.jpg" alt="Profile Picture"
                             style="width: 50px; height: 50px; border-radius: 50%;"></a>
                     </div>
@@ -101,9 +101,9 @@ if (isset($_SESSION['name'])) {
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="adminhome.php" class="nav-item nav-link">Home</a>
-                                <a href="adminshop.php" class="nav-item nav-link">Shop</a>
+                                <a href="adminshop.php" class="nav-item nav-link active">Shop</a>
                                 <a href="adminorders.php" class="nav-item nav-link">Orders</a>
-                                <a href="admindelivery.php" class="nav-item nav-link active">Delivery</a>
+                                <a href="admindelivery.php" class="nav-item nav-link ">Delivery</a>
 
                                 <a href="adminpayment.php" class="nav-item nav-link">Payment</a>
                                 <a href="admincustomers.php" class="nav-item nav-link">Customers</a>
@@ -226,7 +226,7 @@ if (isset($_SESSION['name'])) {
 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
@@ -238,7 +238,7 @@ if (isset($_SESSION['name'])) {
 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>

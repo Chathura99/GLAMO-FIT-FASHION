@@ -62,8 +62,8 @@ if (isset($_SESSION['name'])) {
                             <?php echo $_SESSION['name'] ?>
                         </p>
                         <a href="profile.php">
-                        <img src="images/testuser.jpg" alt="Profile Picture"
-                            style="width: 50px; height: 50px; border-radius: 50%;"></a>
+                            <img src="images/testuser.jpg" alt="Profile Picture"
+                                style="width: 50px; height: 50px; border-radius: 50%;"></a>
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -137,7 +137,7 @@ if (isset($_SESSION['name'])) {
                                 <a href="index.php" class="nav-item nav-link">Home</a>
                                 <a href="shop.php" class="nav-item nav-link">Shop</a>
                                 <a href="cart.php" class="nav-item nav-link active">Shopping Cart</a>
-                                <a href="checkout.php" class="nav-item nav-link">Checkout</a>
+                                <a href="checkout.php" class="nav-item nav-link">Order</a>
 
                                 <a href="contact.php" class="nav-item nav-link">Contact</a>
                             </div>
@@ -179,6 +179,7 @@ if (isset($_SESSION['name'])) {
                     <table class="table table-light table-borderless table-hover text-center mb-0">
                         <thead class="thead-dark">
                             <tr>
+                                <th></th>
                                 <th>Products</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
@@ -188,38 +189,58 @@ if (isset($_SESSION['name'])) {
                         </thead>
                         <tbody class="align-middle">
 
-                            <tr>
-                                <td class="align-middle"><img src="images/women.jpg" alt="" style="width: 50px;"> BABY PINK
-                                    FROCK
-                                </td>
-                                <td class="align-middle">LKR 900</td>
+                            
+                            <?php
+                            $userID = $_SESSION['userId'];
+                            $result = mysqli_query($conn, "select * from cart_products 
+                            INNER join cart on cart_products.cart_id =  cart.cart_id 
+                            INNER JOIN customer on customer.customer_id=cart.customer_id 
+                            INNER JOIN  product on product.product_id=cart_products.product_id 
+                            INNER join users on users.id=customer.user_id 
+                            where users.id='$userID';"); // Assuming that $conn is the database connection
+                        
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) { ?>
+
+                                    
+                                    <tr>
+                                <td class="align-middle"><img src=<?php echo "images/" . $row['image'] ?> alt="" style="width: 50px;">  </td>                            
+                            
+                                <td><?php echo $row['product_name'] ?></td>
+                                <td class="align-middle">LKR <?php echo $row['price'] ?></td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
 
                                         <input type="text"
-                                            class="form-control form-control-sm bg-secondary border-0 text-center" value="1"
+                                            class="form-control form-control-sm bg-secondary border-0 text-center" value=<?php echo $row['quantity'] ?>
                                             disabled>
 
                                     </div>
                                 </td>
-                                <td class="align-middle">LKR 1300</td>
+                                <td class="align-middle">LKR <?php echo $row['quantity']*$row['price'] ?></td>
                                 <td class="align-middle"><button class="btn btn-sm btn-danger p-2"><i
                                             class="fa fa-times"></i></button></td>
                             </tr>
+
+                                <?php
+                                }
+                            } else {
+                                echo "0 results";
+                            } ?>
 
                             <tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="col-lg-4">
-                    <form class="mb-30" action="">
-                        <div class="input-group">
-                            <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary">Apply Coupon</button>
-                            </div>
-                        </div>
-                    </form>
+                    <!-- <form class="mb-30" action="">
+                                <div class="input-group">
+                                    <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary">Apply Coupon</button>
+                                    </div>
+                                </div>
+                            </form> -->
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
                             Summary</span></h5>
                     <div class="bg-dark p-5 mb-5">
@@ -238,9 +259,38 @@ if (isset($_SESSION['name'])) {
                                 <h5>Total</h5>
                                 <h5>LKR 1650</h5>
                             </div>
-                            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To
-                                Checkout</button>
+
                         </div>
+                        <!-- HTML form for payment -->
+                        <form id="payment-form" class='form-group'>
+                            <label for="card-number">Card Number:</label>
+                            <input type="text" id="card-number" name="card-number" class="form-control">
+                            <label for="expiry-date">Expiration Date:</label>
+                            <input type="text" id="expiry-date" name="expiry-date" class="form-control">
+                            <label for="cvv">CVV:</label>
+                            <input type="text" id="cvv" name="cvv" class="form-control">
+                            <label for="amount">Amount:</label>
+                            <input type="text" id="amount" name="amount" class="form-control">
+                            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To
+                                Order</button>
+                        </form>
+
+                        <!-- JavaScript to handle form submission and payment request -->
+                        <script>
+                            var form = document.getElementById('payment-form');
+                            form.addEventListener('submit', function (event) {
+                                event.preventDefault();
+
+                                var cardNumber = document.getElementById('card-number').value;
+                                var expiryDate = document.getElementById('expiry-date').value;
+                                var cvv = document.getElementById('cvv').value;
+                                var amount = document.getElementById('amount').value;
+
+                                // Submit payment request to payment gateway API using API key or access token
+                                // Handle response and display result to user
+                            });
+                        </script>
+
                     </div>
                 </div>
             </div>
@@ -267,7 +317,7 @@ if (isset($_SESSION['name'])) {
 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
@@ -279,7 +329,7 @@ if (isset($_SESSION['name'])) {
 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>

@@ -50,7 +50,7 @@ if (isset($_SESSION['name'])) {
                         <p style="font-size: 16px; margin: 0;padding:0 10px 0 10px;color:black">
                             <?php echo $_SESSION['name'] ?>
                         </p>
-                        <a href="profile.php">
+                        <a href="adminprofile.php">
                             <img src="images/testuser.jpg" alt="Profile Picture"
                                 style="width: 50px; height: 50px; border-radius: 50%;"></a>
                     </div>
@@ -190,19 +190,19 @@ if (isset($_SESSION['name'])) {
                     <div class="product-offer mb-30" style="height: 200px;">
                         <img class="img-fluid" src="img/offer .jpg" alt="">
                         <div class="offer-text">
-                            <h3 class="text-white mb-3">Active Users</h3>
+                            <h3 class="text-white mb-3">Some</h3>
                             <p>1. </p>
                             <p>2. </p>
                         </div>
                     </div>
                     <!-- <div class="product-offer mb-30" style="height: 200px;">
-                                                                                    <img class="img-fluid" src="img/offer 02.jpg" alt="">
-                                                                                    <div class="offer-text">
-                                                                                        <h6 class="text-white text-uppercase">Save 20%</h6>
-                                                                                        <h3 class="text-white mb-3">Special Offer</h3>
-                                                                                        <a href="" class="btn btn-primary">Shop Now</a>
-                                                                                    </div>
-                                                                                </div> -->
+                                                                                        <img class="img-fluid" src="img/offer 02.jpg" alt="">
+                                                                                        <div class="offer-text">
+                                                                                            <h6 class="text-white text-uppercase">Save 20%</h6>
+                                                                                            <h3 class="text-white mb-3">Special Offer</h3>
+                                                                                            <a href="" class="btn btn-primary">Shop Now</a>
+                                                                                        </div>
+                                                                                    </div> -->
                 </div>
             </div>
         </div>
@@ -452,7 +452,7 @@ if (isset($_SESSION['name'])) {
                             } else {
 
                                 if ($name != '' && $des != '' && $price != '' && $quantity != '' && $catId != '') {
-                                    $sql1 = "Insert into product (category_id,description,image,price,name,quantity) values ('$catId','$des','$img','$price','$name','$quantity')";
+                                    $sql1 = "Insert into product (category_id,description,image,price,product_name,quantity) values ('$catId','$des','$img','$price','$name','$quantity')";
                                     // print_r($sql1);
                                     $res1 = mysqli_query($conn, $sql1);
                                     if ($res1) {
@@ -497,7 +497,7 @@ if (isset($_SESSION['name'])) {
                 </div>
             </div>
             <div class="row px-xl-5">
-      
+
 
                 <?php
                 $result = mysqli_query($conn, "SELECT * FROM `product`"); // Assuming that $conn is the database connection
@@ -507,26 +507,33 @@ if (isset($_SESSION['name'])) {
                         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                             <div class="product-item bg-light mb-4">
                                 <div class="product-img position-relative overflow-hidden">
-                                    <img class="img-fluid w-100" src=<?php echo "images/".$row['image'] ?> alt="">
-                                    <div class="product-action"><h6 class='p-3'>Available - <?php echo $row['quantity'] ?></h6>
-                                        <a class="btn btn-outline-dark btn-square m-2" href=""><i
+                                    <img class="img-fluid w-100" src=<?php echo "images/" . $row['image'] ?> alt="">
+                                    <div class="product-action">
+                                        <h6 class='p-3'>Available -
+                                            <?php echo $row['quantity'] ?>
+                                        </h6>
+                                        <!-- <a class="btn btn-outline-dark btn-square m-2" href=""><i
                                                 class="fa fa-shopping-cart"></i></a>
-                                                
+
                                         <div class="container">
                                             <input type="button" onclick="decrementValue(1)" value="-" />
                                             <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="1" />
                                             <input type="button" onclick="incrementValue(1)" value="+" />
-                                        </div>
+                                        </div> -->
 
                                     </div>
                                 </div>
                                 <div class="text-center py-4">
                                     <a class="h6 text-decoration-none text-truncate" href="">
-                                        <?php echo $row['name'] ?>
+                                        <?php echo $row['product_name'] ?>
                                     </a>
-                                    <p> <?php echo $row['description'] ?></p>
+                                    <p>
+                                        <?php echo $row['description'] ?>
+                                    </p>
                                     <div class="d-flex align-items-center justify-content-center mt-2">
-                                        <h5><?php echo 'LKR'.' '.$row['price'] ?></h5>
+                                        <h5>
+                                            <?php echo 'LKR' . ' ' . $row['price'] ?>
+                                        </h5>
                                         <h6 class="text-muted ml-2"><del></del></h6>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center mb-1">
@@ -596,7 +603,7 @@ if (isset($_SESSION['name'])) {
 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
@@ -608,7 +615,7 @@ if (isset($_SESSION['name'])) {
 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>

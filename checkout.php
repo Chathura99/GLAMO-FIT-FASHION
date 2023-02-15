@@ -137,7 +137,7 @@ if (isset($_SESSION['name'])) {
                                 <a href="index.php" class="nav-item nav-link">Home</a>
                                 <a href="shop.php" class="nav-item nav-link">Shop</a>
                                 <a href="cart.php" class="nav-item nav-link ">Shopping Cart</a>
-                                <a href="checkout.php" class="nav-item nav-link active">Checkout</a>
+                                <a href="checkout.php" class="nav-item nav-link active">Order</a>
 
                                 <a href="contact.php" class="nav-item nav-link">Contact</a>
                             </div>
@@ -165,7 +165,7 @@ if (isset($_SESSION['name'])) {
                     <nav class="breadcrumb bg-light mb-30">
                         <a class="breadcrumb-item text-dark" href="#">Home</a>
                         <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                        <span class="breadcrumb-item active">Checkout</span>
+                        <span class="breadcrumb-item active">Order</span>
                     </nav>
                 </div>
             </div>
@@ -173,10 +173,10 @@ if (isset($_SESSION['name'])) {
         <!-- Breadcrumb End -->
 
 
-        <!-- Checkout Start -->
+        <!-- Order Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
-            <div class="col-lg-8"><h1>Table</h1>
+            <div class="col-lg-8"><h1>Completed Orders</h1>
                         </div>
                 <!-- <div class="col-lg-8">
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing
@@ -297,7 +297,7 @@ if (isset($_SESSION['name'])) {
                         </div>
                     </div>
                 </div> -->
-                <div class="col-lg-4">
+                <!-- <div class="col-lg-4">
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order
                             Total</span></h5>
                     <div class="bg-dark p-30 mb-5  p-4">
@@ -360,8 +360,8 @@ if (isset($_SESSION['name'])) {
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Checkout End -->
+        </div> -->
+        <!-- Order End -->
 
 
         <!-- Footer Start -->
@@ -383,7 +383,7 @@ if (isset($_SESSION['name'])) {
                                 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
@@ -395,7 +395,7 @@ if (isset($_SESSION['name'])) {
                                 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>

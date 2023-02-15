@@ -137,7 +137,7 @@ if (isset($_SESSION['name'])) {
                                 <a href="index.php" class="nav-item nav-link">Home</a>
                                 <a href="shop.php" class="nav-item nav-link">Shop</a>
                                 <a href="cart.php" class="nav-item nav-link">Shopping Cart</a>
-                                <a href="checkout.php" class="nav-item nav-link">Checkout</a>
+                                <a href="checkout.php" class="nav-item nav-link">Order</a>
 
                                 <a href="contact.php" class="nav-item nav-link active">Contact</a>
                             </div>
@@ -243,7 +243,7 @@ if (isset($_SESSION['name'])) {
                                 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
@@ -255,7 +255,7 @@ if (isset($_SESSION['name'])) {
                                 
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>

@@ -53,6 +53,8 @@ error_reporting(0);
 										$row = mysqli_fetch_assoc($res);
 										session_start();
 										$_SESSION['name'] = $row['name'];
+										$_SESSION['userId'] = $row['id'];
+										$_SESSION['type'] = $row['type'];
 										if ($row['type'] == 'admin') {
 											header("location:adminhome.php");
 
