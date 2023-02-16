@@ -80,20 +80,23 @@ if (isset($_SESSION['name'])) {
                     </div>
                 </div>
             </div>
+           
             <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
                 <div class="col-lg-4">
                     <a href="" class="text-decoration-none">
-                        <span class="h1 text-uppercase text-dark bg-light px-2">GLAMO</span>
-                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1"> FIT FASHION</span>
+                    <img src="./images/logo.jpg" alt="Avatar" style='border-radius: 50%;width:30%'>
+                        <span class="h3 text-uppercase text-dark bg-light px-2">GLAMO</span>
+                        <span class="h3 text-uppercase text-light bg-primary px-2 ml-n1"> FIT FASHION</span>
                     </a>
                 </div>
                 <div class="col-lg-4 col-6 text-left">
 
                 </div>
-                <div class="col-lg-4 col-6 text-right">
+                   <div class="col-lg-4 col-6 text-right">
                     <p class="m-0">Customer Service</p>
                     <h5 class="m-0">076- 4272434</h5>
                 </div>
+
             </div>
         </div>
         <!-- Topbar End -->
