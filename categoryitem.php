@@ -8,7 +8,7 @@ if (isset($_SESSION['name'])) {
 
     <head>
         <meta charset="utf-8">
-        <title>Glamo Fit Fashion</title>
+        <title>Glamo Fit Fashion - Online Shop Website </title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
@@ -62,8 +62,9 @@ if (isset($_SESSION['name'])) {
                             <?php echo $_SESSION['name'] ?>
                         </p>
                         <a href="profile.php">
-                        <img src="images/testuser.jpg" alt="Profile Picture"
-                            style="width: 50px; height: 50px; border-radius: 50%;"></a>
+                            <a href="profile.php">
+                                <img src="images/testuser.jpg" alt="Profile Picture"
+                                    style="width: 50px; height: 50px; border-radius: 50%;"></a></a>
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -107,7 +108,7 @@ if (isset($_SESSION['name'])) {
                         <h6 class="text-light m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
                         <i class="fa fa-angle-down text-light"></i>
                     </a>
-                     <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
+                    <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
                         id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                         <div class="navbar-nav w-100">
                             <?php
@@ -134,19 +135,19 @@ if (isset($_SESSION['name'])) {
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="index.php" class="nav-item nav-link">Home</a>
+                                <a href="index.php" class="nav-item nav-link active">Home</a>
                                 <a href="shop.php" class="nav-item nav-link">Shop</a>
                                 <a href="cart.php" class="nav-item nav-link">Shopping Cart</a>
                                 <a href="checkout.php" class="nav-item nav-link">Order</a>
 
-                                <a href="contact.php" class="nav-item nav-link active">Contact</a>
+                                <a href="contact.php" class="nav-item nav-link">Contact</a>
                             </div>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
 
                                 <a href="" class="btn px-0 ml-3">
                                     <a href="notification.php"><i class="fas fa-bell text-primary"></i></a>
                                     <span class="badge text-secondary border border-secondary rounded-circle"
-                                        style="padding-bottom: 2px;">0</span>
+                                        style="padding-bottom: 2px;">10</span>
                                 </a>
                             </div>
                         </div>
@@ -156,59 +157,122 @@ if (isset($_SESSION['name'])) {
         </div>
         <!-- Navbar End -->
 
-
-        <!-- Breadcrumb Start -->
-        <div class="container-fluid">
+        <!-- Query for get latest five -->
+        <div class="container-fluid pt-5 pb-3">
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="pr-3">Category Name < -----  ></span></h2>
             <div class="row px-xl-5">
-                <div class="col-12">
-                    <nav class="breadcrumb bg-light mb-30">
-                        <a class="breadcrumb-item text-dark" href="#">Home</a>
-                        <span class="breadcrumb-item active">Contact Us</span>
-                    </nav>
-                </div>
+<!-- change query to select particular category -->
+
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM `product`"); 
+                // limit latest 5
+            
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                            <div class="product-item bg-light mb-4">
+                                <div class="product-img position-relative overflow-hidden">
+                                    <img class="img-fluid w-100" src=<?php echo "images/" . $row['image'] ?> alt="">
+                                    <div class="product-action">
+                                        <h6 class='p-3'>Available -
+                                            <?php echo $row['quantity'] ?>
+                                        </h6>
+                                        <a class="btn btn-outline-dark btn-square m-2" href=""><i
+                                                class="fa fa-shopping-cart"></i></a>
+
+                                        <div class="container">
+                                            <input type="button" onclick="decrementValue(<?php echo $row['product_id'] ?>)"
+                                                value="-" />
+                                            <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id=<?php
+                                            echo $row['product_id'] ?> />
+                                            <input type="button" onclick="incrementValue(<?php echo $row['product_id'] ?>)"
+                                                value="+" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-dark font-weight-bold" href="">
+                                        <?php echo $row['product_name'] ?>
+                                    </a>
+                                    <p>
+                                        <?php echo $row['description'] ?>
+                                    </p>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h5>
+                                            <?php echo 'LKR' . ' ' . $row['price'] ?>
+                                        </h5>
+                                        <h6 class="text-muted ml-2"><del></del></h6>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center mb-1">
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                } else {
+                    echo "0 results";
+                } ?>
+            </div>
+
+        </div>
+
+        <!-- Products End -->
+
+
+      
+
+
+        <!-- Categories Start -->
+        <div class="container-fluid pt-5">
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
+                    class=pr-3">Categories</span></h2>
+            <div class="row px-xl-5 pb-3">
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM `category`"); // Assuming that $conn is the database connection
+            
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1 bg-light border">
+                            <a class="text-decoration-none" href="">
+                                <div class="cat-item d-flex align-items-center mb-2">
+
+                                    <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                                        <img class="img-fluid pt-1" src=<?php echo 'images/' . $row["image"] ?> alt="">
+                                    </div>
+                                    <div class="flex-fill pl-3 text-dark">
+                                        <h6>
+                                            <?php echo $row["category_name"]; ?>
+                                        </h6>
+
+                                    </div>
+
+
+                                </div>
+                            </a>
+                        </div>
+                    <?php
+                    }
+                } else {
+                    echo "0 results";
+                } ?>
+
             </div>
         </div>
-        <!-- Breadcrumb End -->
+        <!-- Categories End -->
 
-        <!-- Contact Start -->
-        <div class="container-fluid" style='background-image: url(./images/About-us-1-1.jpg);background-size: contain;'>
-            <div class="row px-xl-5">
-                <div class="col-lg-7 mb-5" style='padding-right:300px;padding-top:100px'>
-                    <div class="contact-form bg-secondary p-30 p-3">
-                        <div id="success"></div>
-                        <form name="sentMessage" id="contactForm" novalidate="novalidate" >
-                            <div class="control-group">
-                                <input type="text" class="form-control" id="name" placeholder="Your Name"
-                                    required="required" data-validation-required-message="Please enter your name" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <input type="email" class="form-control" id="email" placeholder="Your Email"
-                                    required="required" data-validation-required-message="Please enter your email" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <input type="text" class="form-control" id="subject" placeholder="Subject"
-                                    required="required" data-validation-required-message="Please enter a subject" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <textarea class="form-control" rows="8" id="message" placeholder="Message"
-                                    required="required"
-                                    data-validation-required-message="Please enter your message"></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Submit
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-              
-            </div>
-        </div>
-        <!-- Contact End -->
+
+
+
+       
+
 
 
         <!-- Footer Start -->
@@ -216,10 +280,9 @@ if (isset($_SESSION['name'])) {
             <div class="row px-xl-5 pt-5">
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Abathann Kandy</i></p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Abathann Kandy</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>glamofit@gmail.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>077-0052775 </p>
-
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>077-0052775</p>
                 </div>
                 <div class="col-lg-8 col-md-12">
                     <div class="row">
@@ -228,14 +291,14 @@ if (isset($_SESSION['name'])) {
                             <div class="d-flex flex-column justify-content-start">
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                                
+
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
                                     Cart</a>
                                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
-                      
+                       
                         <div class="col-md-4 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">SUBSCRIBE</h5>
                             <p>Sign up to the lates news and offers</p>
@@ -290,6 +353,25 @@ if (isset($_SESSION['name'])) {
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
     </body>
+    <script type="text/javascript">
+        function incrementValue(id) {
+            var value = parseInt(document.getElementById(id).value, 10);
+            value = isNaN(value) ? 0 : value;
+            if (value < 10) {
+                value++;
+                document.getElementById(id).value = value;
+            }
+        }
+        function decrementValue(id) {
+            var value = parseInt(document.getElementById(id).value, 10);
+            value = isNaN(value) ? 0 : value;
+            if (value > 1) {
+                value--;
+                document.getElementById(id).value = value;
+            }
+
+        }
+    </script>
 
     </html>
 <?php

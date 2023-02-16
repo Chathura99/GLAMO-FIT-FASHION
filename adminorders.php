@@ -102,21 +102,13 @@ if (isset($_SESSION['name'])) {
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="adminhome.php" class="nav-item nav-link">Home</a>
-                                <a href="adminshop.php" class="nav-item nav-link">Shop</a>
                                 <a href="adminorders.php" class="nav-item nav-link">Orders</a>
                                 <a href="admindelivery.php" class="nav-item nav-link ">Delivery</a>
 
                                 <a href="adminpayment.php" class="nav-item nav-link">Payment</a>
                                 <a href="admincustomers.php" class="nav-item nav-link">Customers</a>
                             </div>
-                            <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-
-                                <a href="" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle"
-                                        style="padding-bottom: 2px;">0</span>
-                                </a>
-                            </div>
+                          
                         </div>
                     </nav>
                 </div>
@@ -124,94 +116,62 @@ if (isset($_SESSION['name'])) {
         </div>
         <!-- Navbar End -->
 
-        </br>
-        <!-- Carousel Start -->
-       
-
         <!-- Featured Start -->
         <div class="container-fluid pt-5">
         <h1>New Orders</h1>
-            <div class="list-group">
-                <?php
-                $result = mysqli_query($conn, "SELECT *
-                FROM orders"); // Assuming that $conn is the database connection
-            
-                if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) { ?>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">
-                                    <?php echo $row["name"]; ?>
-                                </h5>
-                                <small class="text-muted">
-                                    <?php echo $row["date"]; ?>
-                                </small>
-                            </div>
-                            <p class="mb-1">
-                                <?php echo 'LKR '.$row["total_price"]; ?>
-                            </p>
-                            <small class="text-muted">
-                                <?php echo $row["status"]; ?>
-                            </small>
-                           
-                        </a>
-                        <?php
-                    }
-                } else {
-                    echo "0 results";
-                } ?>
+           
+            <div class="col-lg-8 table-responsive mb-5">
+                    <table class="table table-light table-borderless table-hover text-center mb-0">
+                        <thead class="thead-dark">
+                            <tr>
+                               
+                                <th>Name</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th>Date</th> 
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="align-middle">
 
-            </div>
+                            
+                            <?php
+                            $userID = $_SESSION['userId'];
+                            $result = mysqli_query($conn, "SELECT *
+                            FROM orders"); // Assuming that $conn is the database connection
+                        
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) { ?>
+
+                                    
+                                <tr>
+                                <td><?php echo $row["name"]; ?></td>
+                                <td class="align-middle"><?php echo 'LKR '.$row["total_price"]; ?></td>
+                                <td class="align-middle">
+                                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                                        <input type="text"
+                                            class="form-control form-control-sm bg-secondary border-0 text-center" value= <?php echo $row["status"]; ?>
+                                            disabled>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><?php echo $row["date"]; ?></td>
+                                <td class="align-middle"><button class="btn btn-sm btn-danger p-2"><i
+                                            class="fas fa-arrow-right"></i></button></td>
+                            </tr>
+
+                                <?php
+                                }
+                            } else {
+                                echo "0 results";
+                            } ?>
+
+                            <tr>
+                        </tbody>
+                    </table>
+                </div>
           
         </div>
         <!-- Featured End -->
-
-
-
-        <!-- Offer Start -->
-        <div class="container-fluid pt-5 pb-3">
-    
-            <div class="row px-xl-5">
-                <div class="col-md-6">
-                    <div class="product-offer mb-30" style="height: 300px;">
-                        <img class="img-fluid" src="img/EXN.jpg" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase"></h6>
-                            <h3 class="text-white mb-3">HUGE COLLECTION</h3>
-                            <a href="" class="btn btn-primary">Explore Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="product-offer mb-30" style="height: 300px;">
-                        <img class="img-fluid" src="img/F1.jpg" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase"></h6>
-                            <h3 class="text-white mb-3">FIND YOUR PERFACT FIT</h3>
-                            <a href="" class="btn btn-primary">Shop Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Offer End -->
-
-        <!-- Vendor Start -->
-        <div class="container-fluid py-5">
-            <div class="row px-xl-5">
-                <div class="col">
-                    <div class="owl-carousel vendor-carousel">
-                        <div class="bg-light p-4">
-                            <img src="images/frock3.jpg" alt="">
-                        </div>
-                       
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Vendor End -->
 
 
         <!-- Footer Start -->
@@ -237,18 +197,7 @@ if (isset($_SESSION['name'])) {
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                            <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
-                                    Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                            </div>
-                        </div>
+            
                         <div class="col-md-4 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">SUBSCRIBE</h5>
                             <p>Sign up to the lates news and offers</p>

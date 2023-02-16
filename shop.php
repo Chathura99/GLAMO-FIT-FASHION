@@ -144,7 +144,7 @@ if (isset($_SESSION['name'])) {
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
 
                                 <a href="" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
+                                    <a href="notification.php"><i class="fas fa-bell text-primary"></i></a>
                                     <span class="badge text-secondary border border-secondary rounded-circle"
                                         style="padding-bottom: 2px;">0</span>
                                 </a>
@@ -178,102 +178,55 @@ if (isset($_SESSION['name'])) {
                 <!-- Shop Sidebar Start -->
                 <div class="col-lg-3 col-md-4">
                     <!-- Price Start -->
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">FILTER
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">FILTER
                             BY PRICE </span></h5>
                     <div class="bg-light p-4 mb-30">
                         <form>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                 <input type="checkbox" class="custom-control-input" checked id="price-all">
-                                <label class="custom-control-label" for="price-all">Price LKR 700 - 3000</label>
+                                <label class="custom-control-label" for="price-all">Price LKR 0 - 50</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                 <input type="checkbox" class="custom-control-input" id="price-1">
-                                <label class="custom-control-label" for="price-1">LKR 700-800</label>
+                                <label class="custom-control-label" for="price-1">LKR 500-1000</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                 <input type="checkbox" class="custom-control-input" id="price-2">
-                                <label class="custom-control-label" for="price-2">LKR 900</label>
+                                <label class="custom-control-label" for="price-2">LKR 1000-2000</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                 <input type="checkbox" class="custom-control-input" id="price-3">
-                                <label class="custom-control-label" for="price-3">LKR 1000</label>
+                                <label class="custom-control-label" for="price-3">LKR 2000-4000</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                 <input type="checkbox" class="custom-control-input" id="price-4">
-                                <label class="custom-control-label" for="price-4">LKR 2000</label>
+                                <label class="custom-control-label" for="price-4">LKR 4000-5000</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                                 <input type="checkbox" class="custom-control-input" id="price-5">
-                                <label class="custom-control-label" for="price-5">LKR 3000</label>
+                                <label class="custom-control-label" for="price-5">LKR 5000-10000</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
+                            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='searchbyprice'>Search</button>
+
                         </form>
                     </div>
                     <!-- Price End -->
 
-                    <!-- Color Start -->
-                    <h5 class="section-title position-relative text-uppercase mb-3 mt-2"><span class="bg-secondary pr-3">PRODUCT
-                            COLOR</span></h5>
-                    <div class="bg-light p-4 mb-30">
-                        <form>
-                            <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" checked id="color-all">
-                                <label class="custom-control-label" for="price-all">Yellow</label>
-                                <span class="badge border font-weight-normal"></span>
-                            </div>
-                            <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-1">
-                                <label class="custom-control-label" for="color-1">Pink</label>
-                                <span class="badge border font-weight-normal"></span>
-                            </div>
-                            <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-2">
-                                <label class="custom-control-label" for="color-2">White</label>
-                                <span class="badge border font-weight-normal"></span>
-                            </div>
-                            <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-3">
-                                <label class="custom-control-label" for="color-3">Orange</label>
-                                <span class="badge border font-weight-normal"></span>
-                            </div>
-
-                            <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-3">
-                                <label class="custom-control-label" for="color-3">Red</label>
-                                <span class="badge border font-weight-normal"></span>
-                            </div>
-                            <div
-                                class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-4">
-                                <label class="custom-control-label" for="color-4">Blue</label>
-                                <span class="badge border font-weight-normal"></span>
-                            </div>
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                <input type="checkbox" class="custom-control-input" id="color-5">
-                                <label class="custom-control-label" for="color-5">Green</label>
-                                <span class="badge border font-weight-normal"></span>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- Color End -->
+            
 
                     <!-- Size Start -->
-                    <h5 class="section-title position-relative text-uppercase mb-3 mt-2"><span class="bg-secondary pr-3">ALL
+                    <h5 class="section-title position-relative text-uppercase mb-3 mt-2"><span class=" pr-3">ALL
                             SIZES</span></h5>
                     <div class="bg-light p-4 mb-30">
                         <form>
@@ -312,6 +265,8 @@ if (isset($_SESSION['name'])) {
                                 <label class="custom-control-label" for="size-5">XLL</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
+                            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='searchbysize'>Search</button>
+
                         </form>
                     </div>
                     <!-- Size End -->
@@ -325,7 +280,7 @@ if (isset($_SESSION['name'])) {
 
                         <!-- Query for get latest five -->
         <div class="container-fluid pt-5 pb-3">
-            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Search Products</span></h2>
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="pr-3">Search Products</span></h2>
             <div class="row px-xl-5">
 
 
@@ -394,13 +349,15 @@ if (isset($_SESSION['name'])) {
 
 
                         <div class="col-12">
+                            
                             <nav>
                                 <ul class="pagination justify-content-center">
-                                    <li class="page-item disabled"><a class="page-link" href="#">Previous</span></a></li>
+                                <a href="">View more...</a>
+                                    <!-- <li class="page-item disabled"><a class="page-link" href="#">Previous</span></a></li>
                                     <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                                     <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
                                 </ul>
                             </nav>
                         </div>
@@ -435,18 +392,7 @@ if (isset($_SESSION['name'])) {
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                            <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
-                                    Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                            </div>
-                        </div>
+                       
                         <div class="col-md-4 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">Subscribe</h5>
                             <p>Sign up to the lates news and offers</p>

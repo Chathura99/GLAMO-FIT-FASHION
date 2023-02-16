@@ -112,7 +112,6 @@ if (isset($_SESSION['name'])) {
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="adminhome.php" class="nav-item nav-link">Home</a>
-                                <a href="adminshop.php" class="nav-item nav-link">Shop</a>
                                 <a href="adminorders.php" class="nav-item nav-link">Orders</a>
                                 <a href="admindelivery.php" class="nav-item nav-link ">Delivery</a>
 
@@ -120,14 +119,7 @@ if (isset($_SESSION['name'])) {
                                     class="nav-item nav-link active">Customers</a>
 
                             </div>
-                            <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-
-                                <a href="" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle"
-                                        style="padding-bottom: 2px;">0</span>
-                                </a>
-                            </div>
+                           
                         </div>
                     </nav>
                 </div>
@@ -135,7 +127,6 @@ if (isset($_SESSION['name'])) {
         </div>
         <!-- Navbar End -->
 
-        </br>
 
 
 
@@ -179,84 +170,6 @@ if (isset($_SESSION['name'])) {
                 } ?>
 
             </div>
-            <h1>Other</h1>
-
-            <div class="row px-xl-5 pb-3">
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
-                        <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-                        <h5 class="font-weight-semi-bold m-0">Free Delivery</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-                        <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
-                        <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Featured End -->
-
-
-
-        <!-- Offer Start -->
-        <div class="container-fluid pt-5 pb-3">
-
-            <div class="row px-xl-5">
-                <div class="col-md-6">
-                    <div class="product-offer mb-30" style="height: 300px;">
-                        <img class="img-fluid" src="img/EXN.jpg" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase"></h6>
-                            <h3 class="text-white mb-3">HUGE COLLECTION</h3>
-                            <a href="" class="btn btn-primary">Explore Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="product-offer mb-30" style="height: 300px;">
-                        <img class="img-fluid" src="img/F1.jpg" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase"></h6>
-                            <h3 class="text-white mb-3">FIND YOUR PERFACT FIT</h3>
-                            <a href="" class="btn btn-primary">Shop Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Offer End -->
-
-        <!-- Vendor Start -->
-        <div class="container-fluid py-5">
-            <div class="row px-xl-5">
-                <div class="col">
-                    <div class="owl-carousel vendor-carousel">
-                        <div class="bg-light p-4">
-                            <img src="images/frock3.jpg" alt="">
-                        </div>
-
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Vendor End -->
-
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">

@@ -41,7 +41,18 @@ if (isset($_SESSION['name'])) {
                 </div>
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
-                      <a href="./logout.php" style="padding-left:10px">
+
+                        <div class="btn-group mx-2">
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift
+                                Voucher</button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button">Gift Voucher</button>
+
+                            </div>
+                        </div>
+
+
+                        <a href="./logout.php" style="padding-left:10px">
                             <div class="btn-group">
                                 <button class="btn btn-sm btn-light">LOG OUT</button>
                             </div>
@@ -50,9 +61,10 @@ if (isset($_SESSION['name'])) {
                         <p style="font-size: 16px; margin: 0;padding:0 10px 0 10px;color:black">
                             <?php echo $_SESSION['name'] ?>
                         </p>
-                        <a href="adminprofile.php">
-                        <img src="images/testuser.jpg" alt="Profile Picture"
-                            style="width: 50px; height: 50px; border-radius: 50%;"></a>
+                        <a href="profile.php">
+                            <a href="profile.php">
+                                <img src="images/testuser.jpg" alt="Profile Picture"
+                                    style="width: 50px; height: 50px; border-radius: 50%;"></a></a>
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -78,9 +90,10 @@ if (isset($_SESSION['name'])) {
                 <div class="col-lg-4 col-6 text-left">
 
                 </div>
-                <a href="" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">ADMIN</span>
-                </a>
+                <div class="col-lg-4 col-6 text-right">
+                    <p class="m-0">Customer Service</p>
+                    <h5 class="m-0">076- 4272434</h5>
+                </div>
             </div>
         </div>
         <!-- Topbar End -->
@@ -89,6 +102,28 @@ if (isset($_SESSION['name'])) {
         <!-- Navbar Start -->
         <div class="container-fluid bg-dark mb-30">
             <div class="row px-xl-5">
+                <div class="col-lg-3 d-none d-lg-block">
+                    <a class="btn d-flex align-items-center justify-content-between  w-100" data-toggle="collapse"
+                        href="#navbar-vertical" style="height: 50px; padding: 0 30px;">
+                        <h6 class="text-light m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
+                        <i class="fa fa-angle-down text-light"></i>
+                    </a>
+                    <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
+                        id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                        <div class="navbar-nav w-100">
+                            <?php
+                            $result = mysqli_query($conn, "SELECT * FROM `category`"); // Assuming that $conn is the database connection
+                        
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<a href="" class="nav-item nav-link pl-3">' . $row["category_name"] . '</a>';
+                                }
+                            } else {
+                                echo "0 results";
+                            } ?>
+                        </div>
+                    </nav>
+                </div>
                 <div class="col-lg-9">
                     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                         <a href="" class="text-decoration-none d-block d-lg-none">
@@ -100,20 +135,19 @@ if (isset($_SESSION['name'])) {
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="adminhome.php" class="nav-item nav-link">Home</a>
-                                <a href="adminshop.php" class="nav-item nav-link active">Shop</a>
-                                <a href="adminorders.php" class="nav-item nav-link">Orders</a>
-                                <a href="admindelivery.php" class="nav-item nav-link ">Delivery</a>
+                                <a href="index.php" class="nav-item nav-link active">Home</a>
+                                <a href="shop.php" class="nav-item nav-link">Shop</a>
+                                <a href="cart.php" class="nav-item nav-link">Shopping Cart</a>
+                                <a href="checkout.php" class="nav-item nav-link">Order</a>
 
-                                <a href="adminpayment.php" class="nav-item nav-link">Payment</a>
-                                <a href="admincustomers.php" class="nav-item nav-link">Customers</a>
+                                <a href="contact.php" class="nav-item nav-link">Contact</a>
                             </div>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
 
                                 <a href="" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
+                                    <a href="notification.php"><i class="fas fa-bell text-primary"></i></a>
                                     <span class="badge text-secondary border border-secondary rounded-circle"
-                                        style="padding-bottom: 2px;">0</span>
+                                        style="padding-bottom: 2px;">10</span>
                                 </a>
                             </div>
                         </div>
@@ -123,35 +157,32 @@ if (isset($_SESSION['name'])) {
         </div>
         <!-- Navbar End -->
 
+
         </br>
         <!-- Carousel Start -->
        
 
         <!-- Featured Start -->
         <div class="container-fluid pt-5">
-        <h1>Shop Part</h1>
+        <h1>Notification</h1>
             <div class="row px-xl-5 pb-3">
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
                         <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
                         <h5 class="font-weight-semi-bold m-0">Free Delivery</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
                         <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
                         <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
                     </div>
                 </div>
@@ -160,51 +191,6 @@ if (isset($_SESSION['name'])) {
         <!-- Featured End -->
 
 
-
-        <!-- Offer Start -->
-        <div class="container-fluid pt-5 pb-3">
-    
-            <div class="row px-xl-5">
-                <div class="col-md-6">
-                    <div class="product-offer mb-30" style="height: 300px;">
-                        <img class="img-fluid" src="img/EXN.jpg" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase"></h6>
-                            <h3 class="text-white mb-3">HUGE COLLECTION</h3>
-                            <a href="" class="btn btn-primary">Explore Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="product-offer mb-30" style="height: 300px;">
-                        <img class="img-fluid" src="img/F1.jpg" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase"></h6>
-                            <h3 class="text-white mb-3">FIND YOUR PERFACT FIT</h3>
-                            <a href="" class="btn btn-primary">Shop Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Offer End -->
-
-        <!-- Vendor Start -->
-        <div class="container-fluid py-5">
-            <div class="row px-xl-5">
-                <div class="col">
-                    <div class="owl-carousel vendor-carousel">
-                        <div class="bg-light p-4">
-                            <img src="images/frock3.jpg" alt="">
-                        </div>
-                       
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Vendor End -->
 
 
         <!-- Footer Start -->
@@ -230,18 +216,7 @@ if (isset($_SESSION['name'])) {
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                            <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
-                                    Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                            </div>
-                        </div>
+                      
                         <div class="col-md-4 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">SUBSCRIBE</h5>
                             <p>Sign up to the lates news and offers</p>

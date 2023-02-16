@@ -144,7 +144,7 @@ if (isset($_SESSION['name'])) {
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
 
                                 <a href="" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
+                                    <a href="notification.php"><i class="fas fa-bell text-primary"></i></a>
                                     <span class="badge text-secondary border border-secondary rounded-circle"
                                         style="padding-bottom: 2px;">0</span>
                                 </a>
@@ -176,192 +176,62 @@ if (isset($_SESSION['name'])) {
         <!-- Order Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
-            <div class="col-lg-8"><h1>Completed Orders</h1>
-                        </div>
-                <!-- <div class="col-lg-8">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing
-                            Address</span></h5>
-                    <div class="bg-dark p-30 mb-5 p-4">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label>First Name</label>
-                                <input class="form-control" type="text" placeholder="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Last Name</label>
-                                <input class="form-control" type="text" placeholder="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>E-mail</label>
-                                <input class="form-control" type="text" placeholder="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Mobile No</label>
-                                <input class="form-control" type="text" placeholder="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Address Line 1</label>
-                                <input class="form-control" type="text" placeholder="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Address Line 2</label>
-                                <input class="form-control" type="text" placeholder="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Country</label>
-                                <select class="custom-select">
-                                    <option selected></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>City</label>
-                                <input class="form-control" type="text" placeholder="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>State</label>
-                                <input class="form-control" type="text" placeholder="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>ZIP Code</label>
-                                <input class="form-control" type="text" placeholder="">
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="newaccount">
-                                    <label class="custom-control-label" for="newaccount">Create an account</label>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="shipto">
-                                    <label class="custom-control-label" for="shipto" data-toggle="collapse"
-                                        data-target="#shipping-address">Ship to different address</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="collapse mb-5" id="shipping-address">
-                        <h5 class="section-title position-relative text-uppercase mb-3"><span
-                                class="bg-secondary pr-3">Shipping Address</span></h5>
-                        <div class="p-30 ">
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label>First Name</label>
-                                    <input class="form-control" type="text" placeholder="">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Last Name</label>
-                                    <input class="form-control" type="text" placeholder="">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>E-mail</label>
-                                    <input class="form-control" type="text" placeholder="">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Mobile No</label>
-                                    <input class="form-control" type="text" placeholder="">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Address Line 1</label>
-                                    <input class="form-control" type="text" placeholder="">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Address Line 2</label>
-                                    <input class="form-control" type="text" placeholder="">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Country</label>
-                                    <select class="custom-select">
-                                        <option selected></option>
-                                        <option></option>
-                                        <option></option>
-                                        <option></option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>City</label>
-                                    <input class="form-control" type="text" placeholder="">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>State</label>
-                                    <input class="form-control" type="text" placeholder="">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>ZIP Code</label>
-                                    <input class="form-control" type="text" placeholder="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="col-lg-4">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order
-                            Total</span></h5>
-                    <div class="bg-dark p-30 mb-5  p-4">
-                        <div class="border-bottom">
-                            <h6 class="mb-3">Products</h6>
-                            <div class="d-flex justify-content-between">
-                                <p>PRINTED MINI DRESS</p>
-                                <p>LKR 1190</p>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <p>COLOURFULL MAXI DRESS</p>
-                                <P>LKR 2000</P>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <p>BROWN TROUSERS</p>
-                                <p>LKR 1300</p>
-                            </div>
-                        </div>
-                        <div class="border-bottom pt-3 pb-2">
-                            <div class="d-flex justify-content-between mb-3">
-                                <h6>Subtotal</h6>
-                                <h6>LKR XXXX</h6>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">Shipping</h6>
-                                <h6 class="font-weight-medium">LKR XXX</h6>
-                            </div>
-                        </div>
-                        <div class="pt-2">
-                            <div class="d-flex justify-content-between mt-2">
-                                <h5>Total</h5>
-                                <h5>LKR XXXX</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-5">
-                        <h5 class="section-title position-relative text-uppercase mb-3"><span
-                                class="bg-secondary pr-3">Payment</span></h5>
-                        <div class="bg-dark p-30  p-4">
-                            <div class="form-group">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                    <label class="custom-control-label" for="paypal">Paypal</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" name="payment" id="directcheck">
-                                    <label class="custom-control-label" for="directcheck">Direct Check</label>
-                                </div>
-                            </div>
-                            <div class="form-group mb-4">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-                                    <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
-                                </div>
-                            </div>
-                            <button class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
-                        </div>
-                    </div>
+          <!-- Featured Start -->
+        <div class="container-fluid pt-5">
+        <h1>Completed Orders</h1>
+           
+            <div class="col-lg-8 table-responsive mb-5">
+                    <table class="table table-light table-borderless table-hover text-center mb-0">
+                        <thead class="thead-dark">
+                            <tr>
+                               
+                                <th>Name</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th>Date</th> 
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="align-middle">
+
+                            
+                            <?php
+                            $userID = $_SESSION['userId'];
+                            $result = mysqli_query($conn, "SELECT *
+                            FROM orders"); // Assuming that $conn is the database connection
+                        
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) { ?>
+
+                                    
+                                <tr>
+                                <td><?php echo $row["name"]; ?></td>
+                                <td class="align-middle"><?php echo 'LKR '.$row["total_price"]; ?></td>
+                                <td class="align-middle">
+                                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                                        <input type="text"
+                                            class="form-control form-control-sm bg-secondary border-0 text-center" value= <?php echo $row["status"]; ?>
+                                            disabled>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><?php echo $row["date"]; ?></td>
+                                <td class="align-middle"><button class="btn btn-sm btn-danger p-2"><i
+                                            class="fas fa-arrow-right"></i></button></td>
+                            </tr>
+
+                                <?php
+                                }
+                            } else {
+                                echo "0 results";
+                            } ?>
+
+                            <tr>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
-        </div> -->
-        <!-- Order End -->
+          
+        </div>
+        <!-- Featured End -->
 
 
         <!-- Footer Start -->
@@ -387,18 +257,7 @@ if (isset($_SESSION['name'])) {
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                            <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                                
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
-                                    Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                            </div>
-                        </div>
+                      
                         <div class="col-md-4 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">SUBSCRIBE</h5>
                             <p>Sign up to the lates news and offers</p>

@@ -144,7 +144,7 @@ if (isset($_SESSION['name'])) {
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
 
                                 <a href="" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
+                                    <a href="notification.php"><i class="fas fa-bell text-primary"></i></a>
                                     <span class="badge text-secondary border border-secondary rounded-circle"
                                         style="padding-bottom: 2px;">0</span>
                                 </a>
@@ -233,27 +233,10 @@ if (isset($_SESSION['name'])) {
                     </table>
                 </div>
                 <div class="col-lg-4">
-                    <!-- <form class="mb-30" action="">
-                                <div class="input-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary">Apply Coupon</button>
-                                    </div>
-                                </div>
-                            </form> -->
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
+                   
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">Cart
                             Summary</span></h5>
-                    <div class="bg-dark p-5 mb-5">
-                        <div class="border-bottom pb-2">
-                            <div class="d-flex justify-content-between mb-3">
-                                <h6>Subtotal</h6>
-                                <h6>LKR 1300</h6>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">Shipping</h6>
-                                <h6 class="font-weight-medium">LKR 350</h6>
-                            </div>
-                        </div>
+                    <div class=" bg-secondary p-5 mb-5" >
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Total</h5>
@@ -261,15 +244,20 @@ if (isset($_SESSION['name'])) {
                             </div>
 
                         </div>
+                        <div class="border-bottom pb-2">
+                            
+                           
+                        </div>
+                        
                         <!-- HTML form for payment -->
                         <form id="payment-form" class='form-group'>
-                            <label for="card-number">Card Number:</label>
+                            <label for="card-number"  class='text-light'>Card Number:</label>
                             <input type="text" id="card-number" name="card-number" class="form-control">
-                            <label for="expiry-date">Expiration Date:</label>
+                            <label for="expiry-date"  class='text-light'>Expiration Date:</label>
                             <input type="text" id="expiry-date" name="expiry-date" class="form-control">
-                            <label for="cvv">CVV:</label>
+                            <label for="cvv" class='text-light'>CVV:</label>
                             <input type="text" id="cvv" name="cvv" class="form-control">
-                            <label for="amount">Amount:</label>
+                            <label for="amount" class='text-light'>Amount:</label>
                             <input type="text" id="amount" name="amount" class="form-control">
                             <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To
                                 Order</button>
@@ -321,18 +309,7 @@ if (isset($_SESSION['name'])) {
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                            <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
-                                    Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                            </div>
-                        </div>
+                        
                         <div class="col-md-4 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">SUBSCRIBE</h5>
                             <p>Sign up to the lates news and offers</p>

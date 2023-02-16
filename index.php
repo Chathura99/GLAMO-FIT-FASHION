@@ -145,9 +145,9 @@ if (isset($_SESSION['name'])) {
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
 
                                 <a href="" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
+                                    <a href="notification.php"><i class="fas fa-bell text-primary"></i></a>
                                     <span class="badge text-secondary border border-secondary rounded-circle"
-                                        style="padding-bottom: 2px;">0</span>
+                                        style="padding-bottom: 2px;">10</span>
                                 </a>
                             </div>
                         </div>
@@ -278,21 +278,21 @@ if (isset($_SESSION['name'])) {
         <!-- Categories Start -->
         <div class="container-fluid pt-5">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
-                    class="bg-secondary pr-3">Categories</span></h2>
+                    class=pr-3">Categories</span></h2>
             <div class="row px-xl-5 pb-3">
                 <?php
                 $result = mysqli_query($conn, "SELECT * FROM `category`"); // Assuming that $conn is the database connection
             
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) { ?>
-                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1 bg-dark">
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1 bg-light border">
                             <a class="text-decoration-none" href="">
-                                <div class="cat-item d-flex align-items-center mb-4">
+                                <div class="cat-item d-flex align-items-center mb-2">
 
                                     <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                        <img class="img-fluid" src=<?php echo 'images/' . $row["image"] ?> alt="">
+                                        <img class="img-fluid pt-1" src=<?php echo 'images/' . $row["image"] ?> alt="">
                                     </div>
-                                    <div class="flex-fill pl-3">
+                                    <div class="flex-fill pl-3 text-dark">
                                         <h6>
                                             <?php echo $row["category_name"]; ?>
                                         </h6>
@@ -346,7 +346,7 @@ if (isset($_SESSION['name'])) {
 
         <!-- Query for get latest five -->
         <div class="container-fluid pt-5 pb-3">
-            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">NEW
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="pr-3">NEW
                     ARRIVALS</span></h2>
             <div class="row px-xl-5">
 
@@ -380,7 +380,7 @@ if (isset($_SESSION['name'])) {
                                     </div>
                                 </div>
                                 <div class="text-center py-4">
-                                    <a class="h6 text-decoration-none text-truncate" href="">
+                                    <a class="h6 text-decoration-none text-dark font-weight-bold" href="">
                                         <?php echo $row['product_name'] ?>
                                     </a>
                                     <p>
@@ -411,11 +411,6 @@ if (isset($_SESSION['name'])) {
             </div>
 
         </div>
-
-
-
-
-
 
         <!-- Products End -->
 
@@ -463,18 +458,7 @@ if (isset($_SESSION['name'])) {
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                            <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
-                                    Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                            </div>
-                        </div>
+                       
                         <div class="col-md-4 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">SUBSCRIBE</h5>
                             <p>Sign up to the lates news and offers</p>

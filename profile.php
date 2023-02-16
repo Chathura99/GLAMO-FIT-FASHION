@@ -144,7 +144,7 @@ if (isset($_SESSION['name'])) {
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
 
                                 <a href="" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
+                                    <a href="notification.php"><i class="fas fa-bell text-primary"></i></a>
                                     <span class="badge text-secondary border border-secondary rounded-circle"
                                         style="padding-bottom: 2px;">0</span>
                                 </a>
@@ -187,91 +187,39 @@ if (isset($_SESSION['name'])) {
                 
                     while ($row = mysqli_fetch_assoc($result)) { ?>
                         <div class="col-lg-8">
-                            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">User
+                            <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">User
                                     Profile</span></h5>
-                            <div class="bg-dark p-30 mb-5 p-4">
+                            <div class="bg-secondary p-30 mb-5 p-4">
                                 <div class="row">
                                     <div class="col-md-6 form-group">
-                                        <label>Name</label>
+                                        <label class='text-light'>Name</label>
                                         <input class="form-control" type="text" placeholder="" value=<?php echo $row["name"]; ?>>
                                     </div>
                                    
                                     <div class="col-md-6 form-group">
-                                        <label>E-mail</label>
+                                        <label class='text-light'>E-mail</label>
                                         <input class="form-control" type="text" placeholder="" value=<?php echo $row["email"]?>>
                                     </div>
                                     <div class="col-md-6 form-group">
-                                        <label>Mobile No</label>
+                                        <label class='text-light'>Mobile No</label>
                                         <input class="form-control" type="text" placeholder="" value=<?php echo $row["Telephone"]?>>
                                     </div>
                                     <div class="col-md-6 form-group">
-                                        <label>Address</label>
+                                        <label class='text-light'>Address</label>
                                         <input class="form-control" type="text" placeholder="" value=<?php echo $row["address"]?>>
                                     </div>
                                     
                                 
                             
                                     <div class="col-md-6 form-group">
-                                        <label>ZIP Code</label>
+                                        <label class='text-light'>ZIP Code</label>
                                         <input class="form-control" type="text" placeholder="" value=<?php echo $row["zip_code"]?>>
                                     </div>
                                     <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='updateUser'>Update</button>
 
                                 </div>
                             </div>
-                            <div class="collapse mb-5" id="shipping-address">
-                                <h5 class="section-title position-relative text-uppercase mb-3"><span
-                                        class="bg-secondary pr-3">Shipping Address</span></h5>
-                                <div class="p-30 ">
-                                    <div class="row">
-                                        <div class="col-md-6 form-group">
-                                            <label>First Name</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>Last Name</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>E-mail</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>Mobile No</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>Address Line 1</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>Address Line 2</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>Country</label>
-                                            <select class="custom-select">
-                                                <option selected></option>
-                                                <option></option>
-                                                <option></option>
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>City</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>State</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>ZIP Code</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
 
 
@@ -310,23 +258,7 @@ if (isset($_SESSION['name'])) {
                                             Us</a>
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-5">
-                                    <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                                    <div class="d-flex flex-column justify-content-start">
-                                        <a class="text-secondary mb-2" href="#"><i
-                                                class="fa fa-angle-right mr-2"></i>Home</a>
-                                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our
-                                            Shop</a>
-
-                                        <a class="text-secondary mb-2" href="#"><i
-                                                class="fa fa-angle-right mr-2"></i>Shopping
-                                            Cart</a>
-                                        <a class="text-secondary mb-2" href="#"><i
-                                                class="fa fa-angle-right mr-2"></i>Order</a>
-                                        <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact
-                                            Us</a>
-                                    </div>
-                                </div>
+                               
                                 <div class="col-md-4 mb-5">
                                     <h5 class="text-secondary text-uppercase mb-4">SUBSCRIBE</h5>
                                     <p>Sign up to the lates news and offers</p>

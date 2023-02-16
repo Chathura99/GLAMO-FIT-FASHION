@@ -101,21 +101,13 @@ if (isset($_SESSION['name'])) {
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="adminhome.php" class="nav-item nav-link active">Home</a>
-                                <a href="adminshop.php" class="nav-item nav-link">Shop</a>
                                 <a href="adminorders.php" class="nav-item nav-link">Orders</a>
                                 <a href="admindelivery.php" class="nav-item nav-link">Delivery</a>
 
                                 <a href="adminpayment.php" class="nav-item nav-link">Payment</a>
                                 <a href="admincustomers.php" class="nav-item nav-link">Customers</a>
                             </div>
-                            <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
 
-                                <a href="" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle"
-                                        style="padding-bottom: 2px;">0</span>
-                                </a>
-                            </div>
                         </div>
                     </nav>
                 </div>
@@ -123,145 +115,41 @@ if (isset($_SESSION['name'])) {
         </div>
         <!-- Navbar End -->
 
-        </br>
-        <!-- Carousel Start -->
-        <div class="container-fluid mb-3">
-            <div class="row px-xl-5">
-                <div class="col-lg-8">
-                    <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#header-carousel" data-slide-to="1"></li>
-                            <li data-target="#header-carousel" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item position-relative active" style="height: 430px;">
-                                <img class="position-absolute w-100 h-100" src="images/frock2.jpg"
-                                    style="object-fit: cover;">
-                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                    <div class="p-3" style="max-width: 700px;">
-                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">GLAMO
-                                            FIT FASHION</h1>
-                                        <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Modern Style Made For
-                                            Every Day Wear</p>
-                                        </p>
-                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                                            href="#">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item position-relative" style="height: 430px;">
-                                <img class="position-absolute w-100 h-100" src="images/women.jpg"
-                                    style="object-fit: cover;">
-                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                    <div class="p-3" style="max-width: 700px;">
-                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">GIRL'S
-                                            FASHION</h1>
-                                        <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Choose Your Own Design
-                                        </p>
-                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                                            href="#">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item position-relative" style="height: 430px;">
-                                <img class="position-absolute w-100 h-100" src="images/kidgirl.jpg"
-                                    style="object-fit: cover;">
-                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                    <div class="p-3" style="max-width: 700px;">
-                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">KID'S
-                                            FASHION</h1>
-                                        <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Discover Cool Styles for
-                                            Your World of Joy</p>
-                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                                            href="#">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-4">
-                    <div class="product-offer mb-30" style="height: 200px;">
-                        <img class="img-fluid" src="img/offer .jpg" alt="">
-                        <div class="offer-text">
-                            <h3 class="text-white mb-3">Some</h3>
-                            <p>1. </p>
-                            <p>2. </p>
-                        </div>
-                    </div>
-                    <!-- <div class="product-offer mb-30" style="height: 200px;">
-                                                                                        <img class="img-fluid" src="img/offer 02.jpg" alt="">
-                                                                                        <div class="offer-text">
-                                                                                            <h6 class="text-white text-uppercase">Save 20%</h6>
-                                                                                            <h3 class="text-white mb-3">Special Offer</h3>
-                                                                                            <a href="" class="btn btn-primary">Shop Now</a>
-                                                                                        </div>
-                                                                                    </div> -->
+        <div class="col-lg-4">
+            <div class="product-offer mb-30" style="height: 200px;">
+                <img class="img-fluid" src="img/offer .jpg" alt="">
+                <div class="offer-text">
+                    <h3 class="text-white mb-3">Current Logged Users</h3>
+                    <p>1. </p>
+                    <p>2. </p>
                 </div>
             </div>
+
+        </div>
+        </div>
         </div>
         <!-- Carousel End -->
-
-
-        <!-- Featured Start -->
-        <div class="container-fluid pt-5">
-            <div class="row px-xl-5 pb-3">
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
-                        <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-                        <h5 class="font-weight-semi-bold m-0">Free Delivery</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-                        <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
-                        <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Featured End -->
-
-
 
         <!-- Categories Start -->
         <div class="container-fluid pt-5">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
-                    class="bg-secondary pr-3">Categories</span>
+                    class=" pr-3">Categories</span>
             </h2>
             <div class="col-lg-8 ml-5">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Add
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">Add
                         Category</span></h5>
                 <form class="signin-form" method='POST' enctype="multipart/form-data">
-                    <div class="bg-dark p-30 mb-5 p-4">
+                    <div class="bg-secondary p-30 mb-5 p-4">
                         <div class="row">
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group text-light">
                                 <label>Category Name</label>
                                 <input class="form-control" type="text" placeholder="" name='name'>
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group text-light">
                                 <label>Category Description</label>
                                 <input class="form-control" type="text" placeholder="" name='description'>
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group text-light">
                                 <label>Image</label>
                                 <input class="form-control" type="file" placeholder="" name='image'>
                             </div>
@@ -326,18 +214,20 @@ if (isset($_SESSION['name'])) {
             
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) { ?>
-                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1 ">
+                        <div class="col-lg-3 col-md-3 col-sm-6 p-1 ">
                             <a class="text-decoration-none" href="">
                                 <div class="cat-item d-flex align-items-center mb-4 bg-light">
 
-                                    <div class="overflow-hidden" style="width: 300px; height: 100px;">
+                                    <div class="overflow-hidden" style="width: 800px; height: 400px;">
                                         <img class="img-fluid" src=<?php echo 'images/' . $row["image"] ?> alt="">
                                     </div>
                                     <div class="flex-fill pl-3">
-                                        <h6 class='pt-2' style='color:black'>
-                                            <?php echo $row["category_name"]; ?>
-                                        </h6>
-                                        <p style='font-size:10px'>
+                                        <bold>
+                                            <h6 class='pt-2' style='color:black'>
+                                                <?php echo $row["category_name"]; ?>
+                                            </h6>
+                                        </bold>
+                                        <p style='font-size:15px' class='text-warning'>
                                             <?php echo $row["description"]; ?>
                                         </p>
 
@@ -357,52 +247,23 @@ if (isset($_SESSION['name'])) {
         </div>
         <!-- Categories End -->
 
-
-        <!-- Offer Start -->
-        <div class="container-fluid pt-5 pb-3">
-            <div class="row px-xl-5">
-                <div class="col-md-6">
-                    <div class="product-offer mb-30" style="height: 300px;">
-                        <img class="img-fluid" src="img/EXN.jpg" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase"></h6>
-                            <h3 class="text-white mb-3">ADD Some</h3>
-                            <a href="" class="btn btn-primary">Button</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="product-offer mb-30" style="height: 300px;">
-                        <img class="img-fluid" src="img/F1.jpg" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase"></h6>
-                            <h3 class="text-white mb-3">ADD Some</h3>
-                            <a href="" class="btn btn-primary">Button</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Offer End -->
-
-
         <!-- Products Start -->
 
         <!-- Query for get latest five -->
         <div class="container-fluid pt-5 pb-3">
-            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">NEW
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class=" pr-3">NEW
                     ARRIVALS</span></h2>
             <div class="col-lg-8 ml-5">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Add
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">Add
                         New Items</span></h5>
                 <form class="signin-form" method='POST' enctype="multipart/form-data">
-                    <div class="bg-dark p-30 mb-5 p-4">
+                    <div class="bg-secondary p-30 mb-5 p-4">
                         <div class="row">
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group text-light">
                                 <label>Item Name</label>
                                 <input class="form-control" type="text" placeholder="" name='name'>
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group text-light">
                                 <label>Category</label>
                                 <select class="custom-select" name='catId'>
                                     <?php
@@ -421,19 +282,19 @@ if (isset($_SESSION['name'])) {
 
                                 </select>
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group text-light">
                                 <label>Item Description</label>
                                 <input class="form-control" type="text" placeholder="" name='description'>
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group text-light">
                                 <label>Quantity</label>
                                 <input class="form-control" type="text" placeholder="" name='quantity'>
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group text-light">
                                 <label>Price(1 unit)</label>
-                                <input class="form-control" type="text" placeholder="" name='price'>
+                                <input class="form-control text-light" type="text" placeholder="" name='price'>
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group text-light">
                                 <label>Image</label>
                                 <input class="form-control" type="file" placeholder="" name='image1'>
                             </div>
@@ -513,13 +374,13 @@ if (isset($_SESSION['name'])) {
                                             <?php echo $row['quantity'] ?>
                                         </h6>
                                         <!-- <a class="btn btn-outline-dark btn-square m-2" href=""><i
-                                                class="fa fa-shopping-cart"></i></a>
+                                                                                    class="fa fa-shopping-cart"></i></a>
 
-                                        <div class="container">
-                                            <input type="button" onclick="decrementValue(1)" value="-" />
-                                            <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="1" />
-                                            <input type="button" onclick="incrementValue(1)" value="+" />
-                                        </div> -->
+                                                                            <div class="container">
+                                                                                <input type="button" onclick="decrementValue(1)" value="-" />
+                                                                                <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="1" />
+                                                                                <input type="button" onclick="incrementValue(1)" value="+" />
+                                                                            </div> -->
 
                                     </div>
                                 </div>
@@ -575,9 +436,19 @@ if (isset($_SESSION['name'])) {
                         <div class="bg-light p-4">
                             <img src="images/frock1.jpg" alt="">
                         </div>
-
-
                     </div>
+
+                </div>
+                <div class="col">
+                    <div class="owl-carousel vendor-carousel">
+                        <div class="bg-light p-4">
+                            <img src="images/frock3.jpg" alt="">
+                        </div>
+                        <div class="bg-light p-4">
+                            <img src="images/frock1.jpg" alt="">
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -607,18 +478,7 @@ if (isset($_SESSION['name'])) {
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                            <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
 
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
-                                    Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Order</a>
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                            </div>
-                        </div>
                         <div class="col-md-4 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">SUBSCRIBE</h5>
                             <p>Sign up to the lates news and offers</p>

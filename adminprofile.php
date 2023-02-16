@@ -101,21 +101,13 @@ if (isset($_SESSION['name'])) {
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="adminhome.php" class="nav-item nav-link active">Home</a>
-                                <a href="adminshop.php" class="nav-item nav-link">Shop</a>
                                 <a href="adminorders.php" class="nav-item nav-link">Orders</a>
                                 <a href="admindelivery.php" class="nav-item nav-link">Delivery</a>
 
                                 <a href="adminpayment.php" class="nav-item nav-link">Payment</a>
                                 <a href="admincustomers.php" class="nav-item nav-link">Customers</a>
                             </div>
-                            <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-
-                                <a href="" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle"
-                                        style="padding-bottom: 2px;">0</span>
-                                </a>
-                            </div>
+                           
                         </div>
                     </nav>
                 </div>
@@ -276,23 +268,7 @@ if (isset($_SESSION['name'])) {
                                             Us</a>
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-5">
-                                    <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                                    <div class="d-flex flex-column justify-content-start">
-                                        <a class="text-secondary mb-2" href="#"><i
-                                                class="fa fa-angle-right mr-2"></i>Home</a>
-                                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our
-                                            Shop</a>
-
-                                        <a class="text-secondary mb-2" href="#"><i
-                                                class="fa fa-angle-right mr-2"></i>Shopping
-                                            Cart</a>
-                                        <a class="text-secondary mb-2" href="#"><i
-                                                class="fa fa-angle-right mr-2"></i>Order</a>
-                                        <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact
-                                            Us</a>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-md-4 mb-5">
                                     <h5 class="text-secondary text-uppercase mb-4">SUBSCRIBE</h5>
                                     <p>Sign up to the lates news and offers</p>
