@@ -199,6 +199,7 @@ if (isset($_SESSION['name'])) {
 
                             
                             <?php
+                            // change query
                             $userID = $_SESSION['userId'];
                             $result = mysqli_query($conn, "SELECT *
                             FROM orders"); // Assuming that $conn is the database connection

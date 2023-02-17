@@ -157,7 +157,7 @@ if (isset($_SESSION['name'])) {
                                     </div>
                                 </td>
                                 <td class="align-middle"><?php echo $row["date"]; ?></td>
-                                <td class="align-middle"><a href=''><button class="btn btn-sm btn-danger p-2" ><i
+                                <td class="align-middle"><a href='adminorders.php?orderIdd=<?php echo $row["order_id"]; ?>'><button class="btn btn-sm btn-danger p-2" ><i
                                             class="fas fa-arrow-right"></i></button></a></td>
                             </tr>
 
@@ -177,43 +177,64 @@ if (isset($_SESSION['name'])) {
                     <div class="product-offer mb-30" style="height: 200px;">
                     <div class="list-group">
                 <?php
+                
+                 if(isset($_GET['orderIdd'])){$orserIdd=$_GET['orderIdd'];
                 $result = mysqli_query($conn, "SELECT *
-                FROM users
-                INNER JOIN customer ON users.id = customer.user_id where type='user'"); // Assuming that $conn is the database connection
-            
+                FROM orders  inner join order_products on order_products.order_id=orders.order_id inner join product on product.product_id=order_products.product_id where orders.order_id=$orserIdd;
+                -- INNER JOIN customer ON users.id = customer.user_id where type='user'
+                "); // Assuming that $conn is the database connection
+                $first=true;
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) { ?>
+
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
+                        <?php if($first==true){ ?>    
+                        <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">
-                                    <?php echo $row["name"]; ?>
+                                    <?php echo 'By :'.$row["name"]; ?>
                                 </h5>
                                 <small class="text-muted">
-                                    <?php echo 'ID000' . $row["id"]; ?>
+                                    <?php echo 'LKR ' . $row["total_price"]; ?>
                                 </small>
                             </div>
                             <p class="mb-1">
-                                <?php echo $row["occupation"]; ?>
+                                <?php echo $row["date"]; ?>
                             </p>
-                            <small class="text-muted">
-                                <?php echo $row["address"] . ' -'; ?>
-                            </small>
-                            <small class="text-muted">
-                                <?php echo $row["email"] . ' -'; ?>
-                            </small>
-                            <small class="text-muted">
-                                <?php echo $row["Telephone"]; ?>
-                            </small>
+                            <?php } ?>
+                            <p class="mb-1">
+                                <?php echo $row["product_name"]; ?>
+                            </p>
+                            <h6><?php echo '('.$row["quantity"].') Items'; ?>
+                        </h6>
+                           
                         </a>
                         <?php
+                                                $first=false;
+
                     }
                 } else {
-                    echo '<p>Please select order first!</p>';
-                } ?>
+                    echo '<p>No Items</p>';
+                } }else{
+                    echo '<p>Please select order first!</p>';}?>
 
             </div>
-            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='posted'>Posted</button>
+            <!-- change the status -->
+            <form method="post">
+    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='posted'>Posted</button>
+</form>
+<?php
+// Assuming you have already established a database connection
 
+if(isset($_POST['posted'])){
+    if(isset($_GET['orderIdd'])){$orserIdd=$_GET['orderIdd'];}
+    $sql = "UPDATE orders SET status='posting' WHERE order_id=$orserIdd";
+    if(mysqli_query($conn, $sql)){
+        echo "Status updated successfully";
+    } else {
+        echo "Error updating status: " . mysqli_error($conn);
+    }
+}
+?>
                     </div>
                 </div>
                         </div>
