@@ -145,7 +145,7 @@ if (isset($_SESSION['name'])) {
                 
                     while ($row = mysqli_fetch_assoc($result)) { ?>
                         <div class="col-lg-8">
-                            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">User
+                            <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">User
                                     Profile</span></h5>
                             <div class="bg-dark p-30 mb-5 p-4">
                                 <div class="row">
@@ -177,59 +177,8 @@ if (isset($_SESSION['name'])) {
 
                                 </div>
                             </div>
-                            <div class="collapse mb-5" id="shipping-address">
-                                <h5 class="section-title position-relative text-uppercase mb-3"><span
-                                        class="bg-secondary pr-3">Shipping Address</span></h5>
-                                <div class="p-30 ">
-                                    <div class="row">
-                                        <div class="col-md-6 form-group">
-                                            <label>First Name</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>Last Name</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>E-mail</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>Mobile No</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>Address Line 1</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>Address Line 2</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>Country</label>
-                                            <select class="custom-select">
-                                                <option selected></option>
-                                                <option></option>
-                                                <option></option>
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>City</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>State</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>ZIP Code</label>
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                         
+                            
                         </div>
 
 

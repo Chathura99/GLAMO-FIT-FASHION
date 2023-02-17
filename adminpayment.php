@@ -117,7 +117,6 @@ if (isset($_SESSION['name'])) {
         </div>
         <!-- Navbar End -->
 
-        </br>
         <div class="container-fluid pt-5">
         <h1>Payment History</h1>
 
@@ -127,9 +126,8 @@ if (isset($_SESSION['name'])) {
                             <tr>
                                
                                 <th>Name</th>
-                                <th>Total Price</th>
-                                <th>Status</th>
-                                <th>Date</th> 
+                                <th>Payment Amount</th>
+                                <th>Payment Date</th> 
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -139,7 +137,7 @@ if (isset($_SESSION['name'])) {
                             <?php
                             $userID = $_SESSION['userId'];
                             $result = mysqli_query($conn, "SELECT *
-                            FROM orders"); // Assuming that $conn is the database connection
+                            FROM payment inner join orders on payment.order_id=orders.order_id"); // Assuming that $conn is the database connection
                         
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -147,14 +145,8 @@ if (isset($_SESSION['name'])) {
                                     
                                 <tr>
                                 <td><?php echo $row["name"]; ?></td>
-                                <td class="align-middle"><?php echo 'LKR '.$row["total_price"]; ?></td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <input type="text"
-                                            class="form-control form-control-sm bg-secondary border-0 text-center" value= <?php echo $row["status"]; ?>
-                                            disabled>
-                                    </div>
-                                </td>
+                                <td class="align-middle"><?php echo 'LKR '.$row["amount"]; ?></td>
+                                
                                 <td class="align-middle"><?php echo $row["date"]; ?></td>
                                 <td class="align-middle"><button class="btn btn-sm btn-danger p-2"><i
                                             class="fas fa-arrow-right"></i></button></td>

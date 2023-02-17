@@ -116,7 +116,7 @@ if (isset($_SESSION['name'])) {
         </div>
         <!-- Navbar End -->
 
-        <div class="col-lg-4">
+        <!-- <div class="col-lg-4">
             <div class="product-offer mb-30" style="height: 200px;">
                 <img class="img-fluid" src="img/offer .jpg" alt="">
                 <div class="offer-text">
@@ -126,7 +126,7 @@ if (isset($_SESSION['name'])) {
                 </div>
             </div>
 
-        </div>
+        </div> -->
         </div>
         </div>
         <!-- Carousel End -->

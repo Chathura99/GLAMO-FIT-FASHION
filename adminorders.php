@@ -120,12 +120,13 @@ if (isset($_SESSION['name'])) {
         <!-- Featured Start -->
         <div class="container-fluid pt-5">
         <h1>New Orders</h1>
-           
+        <div class="row px-xl-5">
             <div class="col-lg-8 table-responsive mb-5">
                     <table class="table table-light table-borderless table-hover text-center mb-0">
                         <thead class="thead-dark">
                             <tr>
-                               
+                                                                                  
+                            <th>Order ID</th>
                                 <th>Name</th>
                                 <th>Total Price</th>
                                 <th>Status</th>
@@ -134,19 +135,19 @@ if (isset($_SESSION['name'])) {
                             </tr>
                         </thead>
                         <tbody class="align-middle">
-
-                            
+                           
                             <?php
                             $userID = $_SESSION['userId'];
                             $result = mysqli_query($conn, "SELECT *
-                            FROM orders"); // Assuming that $conn is the database connection
+                            FROM orders where status='pending'"); // Assuming that $conn is the database connection
                         
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) { ?>
 
                                     
                                 <tr>
-                                <td><?php echo $row["name"]; ?></td>
+                                <td class="align-middle"><?php echo $row["order_id"]; ?></td>
+                                <td class="align-middle"><?php echo $row["name"]; ?></td>
                                 <td class="align-middle"><?php echo 'LKR '.$row["total_price"]; ?></td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -156,8 +157,8 @@ if (isset($_SESSION['name'])) {
                                     </div>
                                 </td>
                                 <td class="align-middle"><?php echo $row["date"]; ?></td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger p-2"><i
-                                            class="fas fa-arrow-right"></i></button></td>
+                                <td class="align-middle"><a href=''><button class="btn btn-sm btn-danger p-2" ><i
+                                            class="fas fa-arrow-right"></i></button></a></td>
                             </tr>
 
                                 <?php
@@ -170,10 +171,57 @@ if (isset($_SESSION['name'])) {
                         </tbody>
                     </table>
                 </div>
+                <div class="col-lg-4">
+                <h6 class="text-white text-uppercase">Order Details</h6>
+
+                    <div class="product-offer mb-30" style="height: 200px;">
+                    <div class="list-group">
+                <?php
+                $result = mysqli_query($conn, "SELECT *
+                FROM users
+                INNER JOIN customer ON users.id = customer.user_id where type='user'"); // Assuming that $conn is the database connection
+            
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">
+                                    <?php echo $row["name"]; ?>
+                                </h5>
+                                <small class="text-muted">
+                                    <?php echo 'ID000' . $row["id"]; ?>
+                                </small>
+                            </div>
+                            <p class="mb-1">
+                                <?php echo $row["occupation"]; ?>
+                            </p>
+                            <small class="text-muted">
+                                <?php echo $row["address"] . ' -'; ?>
+                            </small>
+                            <small class="text-muted">
+                                <?php echo $row["email"] . ' -'; ?>
+                            </small>
+                            <small class="text-muted">
+                                <?php echo $row["Telephone"]; ?>
+                            </small>
+                        </a>
+                        <?php
+                    }
+                } else {
+                    echo '<p>Please select order first!</p>';
+                } ?>
+
+            </div>
+            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='posted'>Posted</button>
+
+                    </div>
+                </div>
+                        </div>
+                
           
         </div>
         <!-- Featured End -->
-
+            </br></br></br></br></br></br></br></br></br>
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
