@@ -300,12 +300,15 @@ if (isset($_SESSION['name'])) {
                                 $price = $_POST['price'];
                                 $quantity = $_POST['quantity'];
                                 $img = $_FILES["image1"]["name"];
+                                $size = $_POST['size'];
+                                $currentDateTime = date('Y-m-d H:i:s');
+                                
                                 if (!$conn) {
                                     echo "Server error!";
                                 } else {
 
                                     if ($name != '' && $des != '' && $price != '' && $quantity != '' && $catId != '') {
-                                        $sql1 = "Insert into product (category_id,description,image,price,product_name,quantity) values ('$catId','$des','$img','$price','$name','$quantity')";
+                                        $sql1 = "Insert into product (category_id,description,image,price,product_name,quantity,size,added_date) values ('$catId','$des','$img','$price','$name','$quantity','$size','$currentDateTime')";
                                         // print_r($sql1);
                                         $res1 = mysqli_query($conn, $sql1);
                                         // notify
