@@ -43,8 +43,7 @@ if (isset($_SESSION['name'])) {
                     <div class="d-inline-flex align-items-center">
 
                         <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift
-                                Voucher</button>
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift Box</button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button">Gift Voucher</button>
 
@@ -120,7 +119,10 @@ if (isset($_SESSION['name'])) {
                         
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    echo '<a href="" class="nav-item nav-link pl-3">' . $row["category_name"] . '</a>';
+                                    $cat = $row["category_id"];
+                                    ?>
+                                    <a class="nav-item nav-link pl-3" href='index.php?catId=<?php echo $cat; ?>'><?php echo  $row["category_name"]; ?></a>
+                                    <?php
                                 }
                             } else {
                                 echo "0 results";
@@ -282,7 +284,7 @@ if (isset($_SESSION['name'])) {
         <!-- Categories Start -->
         <div class="container-fluid pt-5">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
-                    class=pr-3">Categories</span></h2>
+                    class="pr-3">Categories</span></h2>
             <div class="row px-xl-5 pb-3">
                 <?php
                 $result = mysqli_query($conn, "SELECT * FROM `category`"); // Assuming that $conn is the database connection
@@ -290,7 +292,7 @@ if (isset($_SESSION['name'])) {
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) { ?>
                         <div class="col-lg-3 col-md-4 col-sm-6 pb-1 bg-light border">
-                            <a class="text-decoration-none" href="">
+                        <a href='index.php?catId=<?php echo $row["category_id"]; ?>'>
                                 <div class="cat-item d-flex align-items-center mb-2">
 
                                     <div class="overflow-hidden" style="width: 100px; height: 100px;">
@@ -316,6 +318,159 @@ if (isset($_SESSION['name'])) {
             </div>
         </div>
         <!-- Categories End -->
+        <!-- particular category start -->
+        <?php
+                
+                 if(isset($_GET['catId'])){
+                    $catId=$_GET['catId'];?>
+                 
+
+               
+         <div class="container-fluid pt-5 pb-3">
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="pr-3"><?php 
+            $catname = mysqli_query($conn, "SELECT category_name FROM `category` where category_id=$catId ");
+            $catname  = mysqli_fetch_assoc($catname);
+            echo $catname['category_name'];
+            
+            ?></span></h2>
+            <div class="row px-xl-5">
+
+
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM `product` where category_id=$catId "); 
+                // limit latest 5
+            
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <div class="col-lg-3 col-md-6 col-sm-6 pb-1">
+                            <div class="product-item bg-light mb-4">
+                                <div class="product-img position-relative overflow-hidden">
+                                    <img class="img-fluid w-100" src=<?php echo "images/" . $row['image'] ?> alt="">
+                                    <div class="product-action">
+                                        <h6 class='p-3'>Available -
+                                            <?php echo $row['quantity'] ?>
+                                        </h6>
+                                        <a class="btn btn-outline-dark btn-square m-2" href=""><i
+                                                class="fa fa-shopping-cart"></i></a>
+
+                                        <div class="container">
+                                            <input type="button" onclick="decrementValue(<?php echo $row['product_id'] ?>)"
+                                                value="-" />
+                                            <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id=<?php
+                                            echo $row['product_id'] ?> />
+                                            <input type="button" onclick="incrementValue(<?php echo $row['product_id'] ?>)"
+                                                value="+" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-dark font-weight-bold" href="">
+                                        <?php echo $row['product_name'] ?>
+                                    </a>
+                                    <p>
+                                        <?php echo $row['description'] ?>
+                                    </p>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h5>
+                                            <?php echo 'LKR' . ' ' . $row['price'] ?>
+                                        </h5>
+                                        <h6 class="text-muted ml-2"><del></del></h6>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center mb-1">
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                } else {
+                    echo "No items yet...";
+                } ?>
+            </div>
+
+        </div>
+        <?php }else{
+            ?>
+  <div class="container-fluid pt-5 pb-3">
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="pr-3"><?php 
+            $catname = mysqli_query($conn, "SELECT category_name FROM `category` where category_id=4 ");
+            $catname  = mysqli_fetch_assoc($catname);
+            echo $catname['category_name'];
+            
+            ?></span></h2>
+            <div class="row px-xl-5">
+
+
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM `product` where category_id=4 "); 
+                // limit latest 5
+            
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <div class="col-lg-3 col-md-6 col-sm-6 pb-1">
+                            <div class="product-item bg-light mb-4">
+                                <div class="product-img position-relative overflow-hidden">
+                                    <img class="img-fluid w-100" src=<?php echo "images/" . $row['image'] ?> alt="">
+                                    <div class="product-action">
+                                        <h6 class='p-3'>Available -
+                                            <?php echo $row['quantity'] ?>
+                                        </h6>
+                                        <a class="btn btn-outline-dark btn-square m-2" href=""><i
+                                                class="fa fa-shopping-cart"></i></a>
+
+                                        <div class="container">
+                                            <input type="button" onclick="decrementValue(<?php echo $row['product_id'] ?>)"
+                                                value="-" />
+                                            <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id=<?php
+                                            echo $row['product_id'] ?> />
+                                            <input type="button" onclick="incrementValue(<?php echo $row['product_id'] ?>)"
+                                                value="+" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-dark font-weight-bold" href="">
+                                        <?php echo $row['product_name'] ?>
+                                    </a>
+                                    <p>
+                                        <?php echo $row['description'] ?>
+                                    </p>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h5>
+                                            <?php echo 'LKR' . ' ' . $row['price'] ?>
+                                        </h5>
+                                        <h6 class="text-muted ml-2"><del></del></h6>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center mb-1">
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                } else {
+                    echo "No items yet...";
+                } ?>
+            </div>
+
+        </div>
+            <?php
+            }?>
+         <!-- particular category end -->
 
 
         <!-- Offer Start -->

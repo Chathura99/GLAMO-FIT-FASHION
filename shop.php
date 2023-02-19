@@ -43,8 +43,7 @@ if (isset($_SESSION['name'])) {
                     <div class="d-inline-flex align-items-center">
 
                         <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift
-                                Voucher</button>
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift Box</button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button">Gift Voucher</button>
 
@@ -184,40 +183,40 @@ if (isset($_SESSION['name'])) {
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">FILTER
                             BY PRICE </span></h5>
                     <div class="bg-light p-4 mb-30">
-                        <form>
+                        <form method='post'>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" checked id="price-all">
-                                <label class="custom-control-label" for="price-all">Price LKR 0 - 50</label>
+                                <input type="radio" class="custom-control-input" checked id="price-all" name='pricecategory' value='500'>
+                                <label class="custom-control-label" for="price-all">below LKR 500</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="price-1">
-                                <label class="custom-control-label" for="price-1">LKR 500-1000</label>
+                                <input type="radio" class="custom-control-input" id="price-1" name='pricecategory' value='1000'>
+                                <label class="custom-control-label" for="price-1">below 1000</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="price-2">
-                                <label class="custom-control-label" for="price-2">LKR 1000-2000</label>
+                                <input type="radio" class="custom-control-input" id="price-2" name='pricecategory' value='2000'>
+                                <label class="custom-control-label" for="price-2">below LKR 2000</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="price-3">
-                                <label class="custom-control-label" for="price-3">LKR 2000-4000</label>
+                                <input type="radio" class="custom-control-input" id="price-3" name='pricecategory' value='4000'>
+                                <label class="custom-control-label" for="price-3">below LKR 4000</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="price-4">
-                                <label class="custom-control-label" for="price-4">LKR 4000-5000</label>
+                                <input type="radio" class="custom-control-input" id="price-4" name='pricecategory' value='5000'>
+                                <label class="custom-control-label" for="price-4">below LKR 5000</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                <input type="checkbox" class="custom-control-input" id="price-5">
-                                <label class="custom-control-label" for="price-5">LKR 5000-10000</label>
+                                <input type="radio" class="custom-control-input" id="price-5" name='pricecategory' value='10000'>
+                                <label class="custom-control-label" for="price-5">below LKR 10000</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='searchbyprice'>Search</button>
@@ -232,43 +231,46 @@ if (isset($_SESSION['name'])) {
                     <h5 class="section-title position-relative text-uppercase mb-3 mt-2"><span class=" pr-3">ALL
                             SIZES</span></h5>
                     <div class="bg-light p-4 mb-30">
-                        <form>
+                        <form method='post'>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" checked id="size-all">
+                                <input type="radio" class="custom-control-input" checked id="size-all" name='sizecategory' value='xs'>
                                 <label class="custom-control-label" for="size-all">XS</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
-                            <div
+                            <div name='sizecategory'
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="size-1">
+                                <input type="radio" class="custom-control-input" id="size-1"  name='sizecategory' value='s'>
                                 <label class="custom-control-label" for="size-1">S</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="size-2">
+                                <input type="radio" class="custom-control-input" id="size-2" name='sizecategory' value='m'>
                                 <label class="custom-control-label" for="size-2">M</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="size-3">
+                                <input type="radio" class="custom-control-input" id="size-3" name='sizecategory' value='l'>
                                 <label class="custom-control-label" for="size-3">L</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div
                                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="size-4">
+                                <input type="radio" class="custom-control-input" id="size-4" name='sizecategory' value='xl'>
                                 <label class="custom-control-label" for="size-4">XL</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
                             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                <input type="checkbox" class="custom-control-input" id="size-5">
+                                <input type="radio" class="custom-control-input" id="size-5" name='sizecategory' value='xll'>
                                 <label class="custom-control-label" for="size-5">XLL</label>
                                 <span class="badge border font-weight-normal"></span>
                             </div>
+                            
+                           
                             <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='searchbysize'>Search</button>
+                       
 
                         </form>
                     </div>
@@ -283,11 +285,99 @@ if (isset($_SESSION['name'])) {
 
                         <!-- Query for get latest five -->
         <div class="container-fluid pt-5 pb-3">
-            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="pr-3">Search Products</span></h2>
+            
+            <?php
+            if(isset($_POST['searchbyprice'])){
+                echo '<h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="pr-3">Search Results</span></h2>';
+
+                echo '<h5>For price below - '.$_POST['pricecategory'].'</h5>';
+            }
+
+            if(isset($_POST['searchbysize'])){
+
+                echo '<h5>For size - '.$_POST['sizecategory'].'</h5>';
+            }
+
+            if (!isset($_POST['searchbysize']) && !isset($_POST['searchbyprice'])){
+                echo '<h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="pr-3">All Items</span></h2>';
+            }
+
+
+                    ?>
             <div class="row px-xl-5">
 
 
                 <?php
+
+                if(isset($_POST['searchbyprice'])){
+                    $pricecategory=$_POST['pricecategory'];
+                   
+                    // echo '<h3>For price below - '.$pricecategory.'</h3>';
+                    $query2 = "SELECT * FROM `product` where price <$pricecategory";
+                
+                $result = mysqli_query($conn,  $query2 ); 
+                // search by price, category, size
+            
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                            <div class="product-item bg-light mb-4">
+                                <div class="product-img position-relative overflow-hidden">
+                                    <img class="img-fluid w-100" src=<?php echo "images/" . $row['image'] ?> alt="">
+                                    <div class="product-action">
+                                        <h6 class='p-3'>Available -
+                                            <?php echo $row['quantity'] ?>
+                                        </h6>
+                                        <a class="btn btn-outline-dark btn-square m-2" href=""><i
+                                                class="fa fa-shopping-cart"></i></a>
+
+                                        <div class="container">
+                                            <input type="button" onclick="decrementValue(<?php echo $row['product_id'] ?>)"
+                                                value="-" />
+                                            <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id=<?php
+                                            echo $row['product_id'] ?> />
+                                            <input type="button" onclick="incrementValue(<?php echo $row['product_id'] ?>)"
+                                                value="+" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-truncate" href="">
+                                        <?php echo $row['product_name'] ?>
+                                    </a>
+                                    <p>
+                                        <?php echo $row['description'] ?>
+                                    </p>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <h6>
+                                            <?php echo 'Available sizes' . ' ' . $row['size'] ?>
+                                        </h6></br>
+                                        <h5>
+                                            <?php echo 'LKR' . ' ' . $row['price'] ?>
+                                        </h5>
+                                        <h6 class="text-muted ml-2"><del></del></h6>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center mb-1">
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small class=></small>
+                                        <small></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                } else {
+                    echo "</br></br></br>Sorry! There are no items yet in  below price";
+                } ?>
+
+                <?php }else if (!isset($_POST['searchbysize']) && !isset($_POST['searchbyprice'])){?>
+                    <?php
+                
                 $result = mysqli_query($conn, "SELECT * FROM `product`"); 
                 // search by price, category, size
             
@@ -323,6 +413,10 @@ if (isset($_SESSION['name'])) {
                                         <?php echo $row['description'] ?>
                                     </p>
                                     <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <h6>
+                                            <?php echo 'Available sizes' . ' ' . $row['size'] ?>
+                                        </h6></br>
+                        
                                         <h5>
                                             <?php echo 'LKR' . ' ' . $row['price'] ?>
                                         </h5>
@@ -342,28 +436,88 @@ if (isset($_SESSION['name'])) {
                     <?php
                     }
                 } else {
-                    echo "0 results";
+                    echo "</br></br></br>Sorry! There are no items yet";
                 } ?>
+                    <?php }?>
+
+                <br>
+
+<?php
+
+if(isset($_POST['searchbysize'])){
+    $sizecategory=$_POST['sizecategory'];
+    // echo '<h3>For size - '.$sizecategory.'</h3></hr>';
+    $query1 = "SELECT * FROM `product` where size like '%" .$sizecategory. "%'";
+    // print($query1);
+
+$result = mysqli_query($conn, $query1); 
+// search by price, category, size
+
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) { ?>
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+            <div class="product-item bg-light mb-4">
+                <div class="product-img position-relative overflow-hidden">
+                    <img class="img-fluid w-100" src=<?php echo "images/" . $row['image'] ?> alt="">
+                    <div class="product-action">
+                        <h6 class='p-3'>Available -
+                            <?php echo $row['quantity'] ?>
+                        </h6>
+                        <a class="btn btn-outline-dark btn-square m-2" href=""><i
+                                class="fa fa-shopping-cart"></i></a>
+
+                        <div class="container">
+                            <input type="button" onclick="decrementValue(<?php echo $row['product_id'] ?>)"
+                                value="-" />
+                            <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id=<?php
+                            echo $row['product_id'] ?> />
+                            <input type="button" onclick="incrementValue(<?php echo $row['product_id'] ?>)"
+                                value="+" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="text-center py-4">
+                    <a class="h6 text-decoration-none text-truncate" href="">
+                        <?php echo $row['product_name'] ?>
+                    </a>
+                    <p>
+                        <?php echo $row['description'] ?>
+                    </p>
+                    <div class="d-flex align-items-center justify-content-center mt-2">
+                    <h6>
+                                            <?php echo 'Available sizes' . ' ' . $row['size'] ?>
+                                        </h6></br>
+                        <h5>
+                            <?php echo 'LKR' . ' ' . $row['price'] ?>
+                        </h5>
+                        <h6 class="text-muted ml-2"><del></del></h6>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center mb-1">
+                        <small class=></small>
+                        <small class=></small>
+                        <small class=></small>
+                        <small class=></small>
+                        <small class=></small>
+                        <small></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
+    }
+} else {
+    echo "</br></br></br>Sorry! There are no items yet in given size";
+} ?>    
+<?php }?>
             </div>
 
         </div>
+        
 
 
 
 
-                        <div class="col-12">
-                            
-                            <nav>
-                                <ul class="pagination justify-content-center">
-                                <a href="">View more...</a>
-                                    <!-- <li class="page-item disabled"><a class="page-link" href="#">Previous</span></a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
-                                </ul>
-                            </nav>
-                        </div>
                     </div>
                 </div>
                 <!-- Shop Product End -->

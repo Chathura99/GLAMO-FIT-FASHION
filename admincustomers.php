@@ -43,8 +43,7 @@ if (isset($_SESSION['name'])) {
                     <div class="d-inline-flex align-items-center">
 
                         <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift
-                                Voucher</button>
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift Box</button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button">Gift Voucher</button>
 
@@ -115,8 +114,8 @@ if (isset($_SESSION['name'])) {
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="adminhome.php" class="nav-item nav-link">Home</a>
-                                <a href="adminorders.php" class="nav-item nav-link">Orders</a>
+                            <a href="admincategories.php" class="nav-item nav-link">Categories</a>
+                                 <a href="adminproducts.php" class="nav-item nav-link ">Products</a>                                <a href="adminorders.php" class="nav-item nav-link">Orders</a>
                                 <a href="admindelivery.php" class="nav-item nav-link ">Delivery</a>
 
                                 <a href="adminpayment.php" class="nav-item nav-link">Payment</a> <a href="admincustomers.php"

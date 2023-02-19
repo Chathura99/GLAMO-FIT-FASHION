@@ -43,8 +43,7 @@ if (isset($_SESSION['name'])) {
                     <div class="d-inline-flex align-items-center">
 
                         <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift
-                                Voucher</button>
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift Box</button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button">Gift Voucher</button>
 
@@ -201,7 +200,7 @@ if (isset($_SESSION['name'])) {
                             INNER JOIN  product on product.product_id=cart_products.product_id 
                             INNER join users on users.id=customer.user_id 
                             where users.id='$userID';"); // Assuming that $conn is the database connection
-                        
+                            $totalValue=0;
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) { ?>
 
@@ -226,6 +225,7 @@ if (isset($_SESSION['name'])) {
                             </tr>
 
                                 <?php
+                                 $totalValue= $totalValue+$row['quantity']*$row['price'];
                                 }
                             } else {
                                 echo "0 results";
@@ -243,7 +243,7 @@ if (isset($_SESSION['name'])) {
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Total</h5>
-                                <h5>LKR 1650</h5>
+                                <h5><?php echo 'LKR ' .$totalValue?></h5>
                             </div>
 
                         </div>

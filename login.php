@@ -56,7 +56,7 @@ error_reporting(0);
 										$_SESSION['userId'] = $row['id'];
 										$_SESSION['type'] = $row['type'];
 										if ($row['type'] == 'admin') {
-											header("location:adminhome.php");
+											header("location:admincategories.php");
 
 										} else {
 											header("location:index.php");

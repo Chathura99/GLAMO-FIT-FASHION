@@ -43,8 +43,7 @@ if (isset($_SESSION['name'])) {
                     <div class="d-inline-flex align-items-center">
 
                         <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift
-                                Voucher</button>
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift Box</button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button">Gift Voucher</button>
 
@@ -202,7 +201,10 @@ if (isset($_SESSION['name'])) {
                             // change query
                             $userID = $_SESSION['userId'];
                             $result = mysqli_query($conn, "SELECT *
-                            FROM orders"); // Assuming that $conn is the database connection
+                            FROM orders 
+                            inner join customer on customer.customer_id=orders.customer_id
+                            inner join users on customer.user_id=users.id where users.id='$userID';
+                            "); // Assuming that $conn is the database connection
                         
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) { ?>

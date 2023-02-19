@@ -102,7 +102,7 @@ if (isset($_SESSION['name'])) {
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="adminhome.php" class="nav-item nav-link">Home</a>
+                                 <a href="admincategories.php" class="nav-item nav-link active">Products</a><a href="adminproducts.php" class="nav-item nav-link">Home</a>
                                 <a href="adminorders.php" class="nav-item nav-link">Orders</a>
                                 <a href="admindelivery.php" class="nav-item nav-link ">Delivery</a>
 
