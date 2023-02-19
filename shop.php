@@ -386,7 +386,7 @@ if (isset($_SESSION['name'])) {
                         mysqli_query($conn, $cart);
                         // get cart id
                         $ccc= "select cart_id from cart where customer_id ='$customerId'";                    
-                        $ccc = mysqli_fetch_assoc(mysqli_query($conn, $exists));
+                        $ccc = mysqli_fetch_assoc(mysqli_query($conn, $ccc));
 
                         $ccc= $ccc['cart_id'];
 
@@ -509,7 +509,7 @@ if (isset($_SESSION['name'])) {
                         mysqli_query($conn, $cart);
                         // get cart id
                         $ccc= "select cart_id from cart where customer_id ='$customerId'";                    
-                        $ccc = mysqli_fetch_assoc(mysqli_query($conn, $exists));
+                        $ccc = mysqli_fetch_assoc(mysqli_query($conn, $ccc));
 
                         $ccc= $ccc['cart_id'];
 
@@ -587,9 +587,9 @@ if (mysqli_num_rows($result) > 0) {
 
                         <div class="container">
                             <form method='post'>
-                            <input type="text" 
+                            <input type="text" name='productId'
                                                 value=<?php
-                                            echo $row['product_id'] ?> hidden name='productId'/>
+                                            echo $row['product_id'] ?> hidden />
                             <input type="button" onclick="decrementValue(<?php echo $row['product_id'] ?>)"
                                 value="-" />
                             <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id=<?php
@@ -642,7 +642,7 @@ if (mysqli_num_rows($result) > 0) {
                         mysqli_query($conn, $cart);
                         // get cart id
                         $ccc= "select cart_id from cart where customer_id ='$customerId'";                    
-                        $ccc = mysqli_fetch_assoc(mysqli_query($conn, $exists));
+                        $ccc = mysqli_fetch_assoc(mysqli_query($conn, $ccc));
 
                         $ccc= $ccc['cart_id'];
 

@@ -371,8 +371,8 @@ if (isset($_SESSION['name'])) {
                     if(isset($_POST['addcart'])){
                         $userID = $_SESSION['userId'];
 
-                        echo '<h6>'.$_POST['quantity'].'</h6>';
-                        echo '<h6>'.$_POST['productId'].'</h6>';
+                        // echo '<h6>'.$_POST['quantity'].'</h6>';
+                        // echo '<h6>'.$_POST['productId'].'</h6>';
                         $quantity = $_POST['quantity'];
                         $productId = $_POST['productId'];
                         // get cus id
@@ -383,18 +383,18 @@ if (isset($_SESSION['name'])) {
                         $exists= "select count(*) as count,cart_id from cart where customer_id ='$customerId'";                    
                         $exists = mysqli_fetch_assoc(mysqli_query($conn, $exists));
                         $c =$exists['count'];
-                        echo '<h6>'.$c.'</h6>';                    
+                        // echo '<h6>'.$c.'</h6>';                    
 
                       // add cart
                       if($c!=0){
                         // print("exists".$exists['cart_id']);
                         $cartId=$exists['cart_id'];
-                        echo '<h6>'.$cartId.'</h6>'; 
+                        // echo '<h6>'.$cartId.'</h6>'; 
                         // check item exits
                         $existsItem= "select count(*) as count from cart_products where cart_id ='$cartId' and product_id='$productId'";                    
                         $existsItem = mysqli_fetch_assoc(mysqli_query($conn, $existsItem));
                         $cc =$existsItem['count']; 
-                        echo '<h6>'.$cc.'</h6>';  
+                        // echo '<h6>'.$cc.'</h6>';  
                         if($cc!=0){ 
                             $update= "update cart_products set quantity='$quantity' where cart_id ='$cartId' and product_id='$productId'";                    
                             mysqli_query($conn, $update);
@@ -410,7 +410,7 @@ if (isset($_SESSION['name'])) {
                         mysqli_query($conn, $cart);
                         // get cart id
                         $ccc= "select cart_id from cart where customer_id ='$customerId'";                    
-                        $ccc = mysqli_fetch_assoc(mysqli_query($conn, $exists));
+                        $ccc = mysqli_fetch_assoc(mysqli_query($conn, $ccc));
 
                         $ccc= $ccc['cart_id'];
 

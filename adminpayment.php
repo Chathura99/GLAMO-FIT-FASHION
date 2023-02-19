@@ -128,7 +128,6 @@ if (isset($_SESSION['name'])) {
                                 <th>Name</th>
                                 <th>Payment Amount</th>
                                 <th>Payment Date</th> 
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody class="align-middle">
@@ -148,8 +147,7 @@ if (isset($_SESSION['name'])) {
                                 <td class="align-middle"><?php echo 'LKR '.$row["amount"]; ?></td>
                                 
                                 <td class="align-middle"><?php echo $row["date"]; ?></td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger p-2"><i
-                                            class="fas fa-arrow-right"></i></button></td>
+                    
                             </tr>
 
                                 <?php

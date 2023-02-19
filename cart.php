@@ -202,30 +202,57 @@ if (isset($_SESSION['name'])) {
                             where users.id='$userID';"); // Assuming that $conn is the database connection
                             $totalValue=0;
                             if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) { ?>
+                                while ($row = mysqli_fetch_assoc($result)) { 
+                                    $cusname = $row['name'];
+                                    $cusid = $row['customer_id'];
+                                    $carid = $row['cart_id'];
+                                    
+                                    
+                                    ?>
+                                
 
                                     
                                     <tr>
                                 <td class="align-middle"><img src=<?php echo "images/" . $row['image'] ?> alt="" style="width: 50px;">  </td>                            
                             
                                 <td><?php echo $row['product_name'] ?></td>
-                                <td class="align-middle">LKR <?php echo $row['price'] ?></td>
+                                <td class="align-middle">LKR <?php echo $row['price'].'.00' ?></td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
-
+                                    
                                         <input type="text"
                                             class="form-control form-control-sm bg-secondary border-0 text-center" value=<?php echo $row['q'] ?>
                                             disabled>
 
                                     </div>
                                 </td>
-                                <td class="align-middle">LKR <?php echo $row['q']*$row['price'] ?></td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger p-2"><i
-                                            class="fa fa-times"></i></button></td>
+                                <td class="align-middle">LKR <?php echo $row['q']*$row['price'].'.00' ?></td>
+                                <td class="align-middle">
+                                    <form method='post'>
+                                    <input type="text" name='productId' value=<?php echo $row['product_id'] ?>
+                                            hidden>
+                                            <input name='carts' type="text" value=<?php echo $row['cart_id'] ?>
+                                            hidden>
+                                    <button class="btn btn-sm btn-danger p-2" name='removeitem'><i
+                                            class="fa fa-times"></i></button>
+                                </form>
+                                <?php 
+                    if(isset($_POST['removeitem'])){
+                        $userID = $_SESSION['userId'];
+                        $productId = $_POST['productId'];
+                        $cartId = $_POST['carts'];
+                        // get cus id
+                        $qq = "delete  from cart_products where product_id ='$productId' and cart_id='$cartId'";                    
+                        mysqli_query($conn, $qq); 
+                        
+                        }?>
+                                        
+                                        
+                                        </td>
                             </tr>
 
                                 <?php
-                                 $totalValue= $totalValue+$row['quantity']*$row['price'];
+                                 $totalValue= $totalValue+$row['q']*$row['price'];
                                 }
                             } else {
                                 echo "0 results";
@@ -243,7 +270,7 @@ if (isset($_SESSION['name'])) {
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Total</h5>
-                                <h5><?php echo 'LKR ' .$totalValue?></h5>
+                                <h5><?php echo 'LKR ' .$totalValue.'.00'?></h5>
                             </div>
 
                         </div>
@@ -253,18 +280,71 @@ if (isset($_SESSION['name'])) {
                         </div>
                         
                         <!-- HTML form for payment -->
-                        <form id="payment-form" class='form-group'>
+                        <form method='post'>
                             <label for="card-number"  class='text-light'>Card Number:</label>
                             <input type="text" id="card-number" name="card-number" class="form-control">
                             <label for="expiry-date"  class='text-light'>Expiration Date:</label>
                             <input type="text" id="expiry-date" name="expiry-date" class="form-control">
                             <label for="cvv" class='text-light'>CVV:</label>
                             <input type="text" id="cvv" name="cvv" class="form-control">
+                        </br>
                             <label for="amount" class='text-light'>Amount:</label>
-                            <input type="text" id="amount" name="amount" class="form-control">
-                            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To
+                            <input type="text" id="amount" name="amount" class="form" value=<?php echo 'LKR:'.$totalValue.'.00'?> disabled>
+                            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" type="submit" name="pay">Proceed To
                                 Order</button>
                         </form>
+                        <?php
+                        if(isset($_POST['pay'])){
+                        $userID = $_SESSION['userId'];
+                        $currentDateTime = date('Y-m-d H:i:s');
+                        
+                        $insertorder= "INSERT INTO orders (name,customer_id,total_price,status,date) VALUES ('$cusname',$cusid,$totalValue,'pending','$currentDateTime')";
+                        print_r($insertorder);
+                        mysqli_query($conn, $insertorder);
+                        // get inserted order id
+                        $oid = "select order_id from orders  where customer_id ='$cusid' and date='$currentDateTime'"; 
+                        print_r($oid );                   
+                        $oid = mysqli_fetch_assoc(mysqli_query($conn, $oid));
+                        $oid =$oid['order_id'];
+
+                        // add using loop
+                        $cartresult = mysqli_query($conn, "select * from cart_products where cart_id='$carid '"); 
+                            
+                        if (mysqli_num_rows($cartresult) > 0) {
+                            while ($row = mysqli_fetch_assoc($cartresult)) { 
+                                $cid=$row['cart_id'];
+                                $pid=$row['product_id'];
+                                $quan=$row['quantity'];
+                                $insertorderproducts= "INSERT INTO order_products (product_id,order_id,quantity) VALUES ('$pid','$oid','$quan')";
+                                mysqli_query($conn, $insertorderproducts);
+                            }
+                        }
+                        
+                        // delete from cart (autimatically delete from cart_products)
+                        $deletecart = "delete from cart where cart_id='$carid'";
+                        mysqli_query($conn, $deletecart);
+
+                        // insert payment
+                        $insertpayment= "INSERT INTO payment(date,order_id,amount) VALUES (' $currentDateTime',$oid,$totalValue,'pending','$currentDateTime')";
+                        // print_r($insertpayment);
+                        mysqli_query($conn, $insertpayment);
+                    
+                    
+                    }
+
+                        ?>
+
+
+
+
+
+                            
+                           
+
+
+
+
+
 
                         <!-- JavaScript to handle form submission and payment request -->
                         <script>

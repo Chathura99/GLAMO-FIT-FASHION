@@ -186,7 +186,7 @@ if (isset($_SESSION['name'])) {
                     <table class="table table-light table-borderless table-hover text-center mb-0">
                         <thead class="thead-dark">
                             <tr>
-                               
+                               <th>ID</th>
                                 <th>Name</th>
                                 <th>Total Price</th>
                                 <th>Status</th>
@@ -200,7 +200,7 @@ if (isset($_SESSION['name'])) {
                             <?php
                             // change query
                             $userID = $_SESSION['userId'];
-                            $result = mysqli_query($conn, "SELECT *
+                            $result = mysqli_query($conn, "SELECT *,orders.date as odate
                             FROM orders 
                             inner join customer on customer.customer_id=orders.customer_id
                             inner join users on customer.user_id=users.id where users.id='$userID';
@@ -211,6 +211,7 @@ if (isset($_SESSION['name'])) {
 
                                     
                                 <tr>
+                                <td><?php echo $row["order_id"]; ?></td> 
                                 <td><?php echo $row["name"]; ?></td>
                                 <td class="align-middle"><?php echo 'LKR '.$row["total_price"]; ?></td>
                                 <td class="align-middle">
@@ -220,9 +221,32 @@ if (isset($_SESSION['name'])) {
                                             disabled>
                                     </div>
                                 </td>
-                                <td class="align-middle"><?php echo $row["date"]; ?></td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger p-2"><i
-                                            class="fas fa-arrow-right"></i></button></td>
+                                <td class="align-middle"><?php echo $row["odate"]; ?></td>
+                                <td class="align-middle">
+                                    <form method="post">
+    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='gotit'>Got It</button>
+    <input type="text" name='oo' class="form-control form-control-sm bg-secondary border-0 text-center" value= <?php echo $row["order_id"]; ?>
+                                            hidden>
+
+                                    </form>
+
+<?php
+// Assuming you have already established a database connection
+
+if(isset($_POST['gotit'])){
+    if(isset($_POST['oo'])){
+        $orderIdd=$_POST['oo'];}
+    $sql = "UPDATE orders SET status='delivered' WHERE order_id=$orderIdd";
+    if(mysqli_query($conn, $sql)){
+        echo "Status updated successfully";
+    } else {
+        echo "Error updating status: " . mysqli_error($conn);
+    }
+}
+?>
+
+
+</td>
                             </tr>
 
                                 <?php
