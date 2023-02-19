@@ -194,7 +194,7 @@ if (isset($_SESSION['name'])) {
                             
                             <?php
                             $userID = $_SESSION['userId'];
-                            $result = mysqli_query($conn, "select * from cart_products 
+                            $result = mysqli_query($conn, "select *,cart_products.quantity as q from cart_products 
                             INNER join cart on cart_products.cart_id =  cart.cart_id 
                             INNER JOIN customer on customer.customer_id=cart.customer_id 
                             INNER JOIN  product on product.product_id=cart_products.product_id 
@@ -214,12 +214,12 @@ if (isset($_SESSION['name'])) {
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
 
                                         <input type="text"
-                                            class="form-control form-control-sm bg-secondary border-0 text-center" value=<?php echo $row['quantity'] ?>
+                                            class="form-control form-control-sm bg-secondary border-0 text-center" value=<?php echo $row['q'] ?>
                                             disabled>
 
                                     </div>
                                 </td>
-                                <td class="align-middle">LKR <?php echo $row['quantity']*$row['price'] ?></td>
+                                <td class="align-middle">LKR <?php echo $row['q']*$row['price'] ?></td>
                                 <td class="align-middle"><button class="btn btn-sm btn-danger p-2"><i
                                             class="fa fa-times"></i></button></td>
                             </tr>

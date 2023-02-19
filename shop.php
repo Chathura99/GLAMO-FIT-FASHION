@@ -327,17 +327,77 @@ if (isset($_SESSION['name'])) {
                                     <div class="product-action">
                                         <h6 class='p-3'>Available -
                                             <?php echo $row['quantity'] ?>
-                                        </h6>
-                                        <a class="btn btn-outline-dark btn-square m-2" href=""><i
-                                                class="fa fa-shopping-cart"></i></a>
+                                        </h6>                                
 
                                         <div class="container">
+                                            <form method='post'>
+                                            <input type="text" 
+                                                value=<?php
+                                            echo $row['product_id'] ?> hidden name='productId'/>
                                             <input type="button" onclick="decrementValue(<?php echo $row['product_id'] ?>)"
                                                 value="-" />
                                             <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id=<?php
                                             echo $row['product_id'] ?> />
                                             <input type="button" onclick="incrementValue(<?php echo $row['product_id'] ?>)"
                                                 value="+" />
+                                                <button class="btn btn-outline-dark btn-square m-2" name="addcartfromprice"><i
+                                                class="fa fa-shopping-cart"></i></button>
+                                            </form>
+                                            <?php 
+                    if(isset($_POST['addcartfromprice'])){
+                        $userID = $_SESSION['userId'];
+
+                        echo '<h6>'.$_POST['quantity'].'</h6>';
+                        echo '<h6>'.$_POST['productId'].'</h6>';
+                        $quantity = $_POST['quantity'];
+                        $productId = $_POST['productId'];
+                        // get cus id
+                        $cus = "select * from customer where user_id ='$userID'";                    
+                        $cus = mysqli_fetch_assoc(mysqli_query($conn, $cus));
+                        $customerId =$cus['customer_id'];
+                        // check already have a cart
+                        $exists= "select count(*) as count,cart_id from cart where customer_id ='$customerId'";                    
+                        $exists = mysqli_fetch_assoc(mysqli_query($conn, $exists));
+                        $c =$exists['count'];
+                        echo '<h6>'.$c.'</h6>';                    
+
+                      // add cart
+                      if($c!=0){
+                        // print("exists".$exists['cart_id']);
+                        $cartId=$exists['cart_id'];
+                        echo '<h6>'.$cartId.'</h6>'; 
+                        // check item exits
+                        $existsItem= "select count(*) as count from cart_products where cart_id ='$cartId' and product_id='$productId'";                    
+                        $existsItem = mysqli_fetch_assoc(mysqli_query($conn, $existsItem));
+                        $cc =$existsItem['count']; 
+                        echo '<h6>'.$cc.'</h6>';  
+                        if($cc!=0){ 
+                            $update= "update cart_products set quantity='$quantity' where cart_id ='$cartId' and product_id='$productId'";                    
+                            mysqli_query($conn, $update);
+                        }else{
+                            $add = "INSERT INTO cart_products (product_id,cart_id,quantity) VALUES ('$productId','$cartId','$quantity')";
+                            mysqli_query($conn, $add);
+                        }
+
+                        
+                      }else{
+                        // add cart first
+                        $cart = "INSERT INTO cart (customer_id) VALUES ('$customerId')";
+                        mysqli_query($conn, $cart);
+                        // get cart id
+                        $ccc= "select cart_id from cart where customer_id ='$customerId'";                    
+                        $ccc = mysqli_fetch_assoc(mysqli_query($conn, $exists));
+
+                        $ccc= $ccc['cart_id'];
+
+                        // add cart items
+                        $add = "INSERT INTO cart_products (product_id,quantity,cart_id) VALUES ('$productId','$quantity','$ccc')";
+                        mysqli_query($conn, $add);
+                      }
+                        
+
+                    }
+                    ?>
                                         </div>
 
                                     </div>
@@ -390,17 +450,77 @@ if (isset($_SESSION['name'])) {
                                     <div class="product-action">
                                         <h6 class='p-3'>Available -
                                             <?php echo $row['quantity'] ?>
-                                        </h6>
-                                        <a class="btn btn-outline-dark btn-square m-2" href=""><i
-                                                class="fa fa-shopping-cart"></i></a>
+                                        </h6>                                  
 
                                         <div class="container">
+                                            <form method='post'>
+                                            <input type="text" 
+                                                value=<?php
+                                            echo $row['product_id'] ?> hidden name='productId'/>
                                             <input type="button" onclick="decrementValue(<?php echo $row['product_id'] ?>)"
                                                 value="-" />
                                             <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id=<?php
                                             echo $row['product_id'] ?> />
                                             <input type="button" onclick="incrementValue(<?php echo $row['product_id'] ?>)"
                                                 value="+" />
+                                                <button class="btn btn-outline-dark btn-square m-2" name="addcartfromall"><i
+                                                class="fa fa-shopping-cart"></i></button>
+                    </form>
+                    <?php 
+                    if(isset($_POST['addcartfromall'])){
+                        $userID = $_SESSION['userId'];
+
+                        // echo '<h6>'.$_POST['quantity'].'</h6>';
+                        // echo '<h6>'.$_POST['productId'].'</h6>';
+                        $quantity = $_POST['quantity'];
+                        $productId = $_POST['productId'];
+                        // get cus id
+                        $cus = "select * from customer where user_id ='$userID'";                    
+                        $cus = mysqli_fetch_assoc(mysqli_query($conn, $cus));
+                        $customerId =$cus['customer_id'];
+                        // check already have a cart
+                        $exists= "select count(*) as count,cart_id from cart where customer_id ='$customerId'";                    
+                        $exists = mysqli_fetch_assoc(mysqli_query($conn, $exists));
+                        $c =$exists['count'];
+                        // echo '<h6>'.$c.'</h6>';                    
+
+                      // add cart
+                      if($c!=0){
+                        // print("exists".$exists['cart_id']);
+                        $cartId=$exists['cart_id'];
+                        // echo '<h6>'.$cartId.'</h6>'; 
+                        // check item exits
+                        $existsItem= "select count(*) as count from cart_products where cart_id ='$cartId' and product_id='$productId'";                    
+                        $existsItem = mysqli_fetch_assoc(mysqli_query($conn, $existsItem));
+                        $cc =$existsItem['count']; 
+                        // echo '<h6>'.$cc.'</h6>';  
+                        if($cc!=0){ 
+                            $update= "update cart_products set quantity='$quantity' where cart_id ='$cartId' and product_id='$productId'";                    
+                            mysqli_query($conn, $update);
+                        }else{
+                            $add = "INSERT INTO cart_products (product_id,cart_id,quantity) VALUES ('$productId','$cartId','$quantity')";
+                            mysqli_query($conn, $add);
+                        }
+
+                        
+                      }else{
+                        // add cart first
+                        $cart = "INSERT INTO cart (customer_id) VALUES ('$customerId')";
+                        mysqli_query($conn, $cart);
+                        // get cart id
+                        $ccc= "select cart_id from cart where customer_id ='$customerId'";                    
+                        $ccc = mysqli_fetch_assoc(mysqli_query($conn, $exists));
+
+                        $ccc= $ccc['cart_id'];
+
+                        // add cart items
+                        $add = "INSERT INTO cart_products (product_id,quantity,cart_id) VALUES ('$productId','$quantity','$ccc')";
+                        mysqli_query($conn, $add);
+                      }
+                        
+
+                    }
+                    ?>
                                         </div>
 
                                     </div>
@@ -463,16 +583,77 @@ if (mysqli_num_rows($result) > 0) {
                         <h6 class='p-3'>Available -
                             <?php echo $row['quantity'] ?>
                         </h6>
-                        <a class="btn btn-outline-dark btn-square m-2" href=""><i
-                                class="fa fa-shopping-cart"></i></a>
+                       
 
                         <div class="container">
+                            <form method='post'>
+                            <input type="text" 
+                                                value=<?php
+                                            echo $row['product_id'] ?> hidden name='productId'/>
                             <input type="button" onclick="decrementValue(<?php echo $row['product_id'] ?>)"
                                 value="-" />
                             <input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id=<?php
                             echo $row['product_id'] ?> />
                             <input type="button" onclick="incrementValue(<?php echo $row['product_id'] ?>)"
                                 value="+" />
+                                <button class="btn btn-outline-dark btn-square m-2" name="addcartfromsize"><i
+                                                class="fa fa-shopping-cart"></i></button>
+    </form>
+    <?php 
+                    if(isset($_POST['addcartfromsize'])){
+                        $userID = $_SESSION['userId'];
+
+                        // echo '<h6>'.$_POST['quantity'].'</h6>';
+                        // echo '<h6>'.$_POST['productId'].'</h6>';
+                        $quantity = $_POST['quantity'];
+                        $productId = $_POST['productId'];
+                        // get cus id
+                        $cus = "select * from customer where user_id ='$userID'";                    
+                        $cus = mysqli_fetch_assoc(mysqli_query($conn, $cus));
+                        $customerId =$cus['customer_id'];
+                        // check already have a cart
+                        $exists= "select count(*) as count,cart_id from cart where customer_id ='$customerId'";                    
+                        $exists = mysqli_fetch_assoc(mysqli_query($conn, $exists));
+                        $c =$exists['count'];
+                        echo '<h6>'.$c.'</h6>';                    
+
+                      // add cart
+                      if($c!=0){
+                        // print("exists".$exists['cart_id']);
+                        $cartId=$exists['cart_id'];
+                        // echo '<h6>'.$cartId.'</h6>'; 
+                        // check item exits
+                        $existsItem= "select count(*) as count from cart_products where cart_id ='$cartId' and product_id='$productId'";                    
+                        $existsItem = mysqli_fetch_assoc(mysqli_query($conn, $existsItem));
+                        $cc =$existsItem['count']; 
+                        // echo '<h6>'.$cc.'</h6>';  
+                        if($cc!=0){ 
+                            $update= "update cart_products set quantity='$quantity' where cart_id ='$cartId' and product_id='$productId'";                    
+                            mysqli_query($conn, $update);
+                        }else{
+                            $add = "INSERT INTO cart_products (product_id,cart_id,quantity) VALUES ('$productId','$cartId','$quantity')";
+                            mysqli_query($conn, $add);
+                        }
+
+                        
+                      }else{
+                        // add cart first
+                        $cart = "INSERT INTO cart (customer_id) VALUES ('$customerId')";
+                        mysqli_query($conn, $cart);
+                        // get cart id
+                        $ccc= "select cart_id from cart where customer_id ='$customerId'";                    
+                        $ccc = mysqli_fetch_assoc(mysqli_query($conn, $exists));
+
+                        $ccc= $ccc['cart_id'];
+
+                        // add cart items
+                        $add = "INSERT INTO cart_products (product_id,quantity,cart_id) VALUES ('$productId','$quantity','$ccc')";
+                        mysqli_query($conn, $add);
+                      }
+                        
+
+                    }
+                    ?>
                         </div>
 
                     </div>
@@ -611,7 +792,7 @@ if (mysqli_num_rows($result) > 0) {
                 document.getElementById(id).value = value;
             }
         }
-        function decrementValue() {
+        function decrementValue(id) {
             var value = parseInt(document.getElementById(id).value, 10);
             value = isNaN(value) ? 0 : value;
             if (value > 1) {

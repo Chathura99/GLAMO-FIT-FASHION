@@ -159,35 +159,31 @@ if (isset($_SESSION['name'])) {
         </div>
         <!-- Navbar End -->
 
-
-        </br>
-        <!-- Carousel Start -->
        
 
-        <!-- Featured Start -->
+        <!-- notice -->
         <div class="container-fluid pt-5">
         <h1>Notification</h1>
             <div class="row px-xl-5 pb-3">
+
+            <?php
+           $loggeduser= $_SESSION['userId'] ;
+                $result = mysqli_query($conn, "SELECT * FROM `notification` where user_id='$loggeduser' or user_id=null"); // Assuming that $conn is the database connection
+            
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
+                <h6 class="font-weight-semi-bold m-0 text-dark"><?php echo $row['date'] ?></h6>
+                    <div class="d-flex align-items-center bg-light  mb-4" style="padding: 30px;">
+                        <p class="font-weight-semi-bold m-0"><?php echo $row['description'] ?></p></br>
+                        
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h5 class="font-weight-semi-bold m-0">Free Delivery</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                        <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
-                    </div>
-                </div>
+                
+                <?php 
+                    }}
+                ?>
             </div>
         </div>
         <!-- Featured End -->
