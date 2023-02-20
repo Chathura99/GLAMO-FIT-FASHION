@@ -89,7 +89,8 @@ if (isset($_SESSION['name'])) {
                     <div class="d-inline-flex align-items-center">
 
                         <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light" data-toggle="dropdown">Gift Box</button>
+                            <a href="giftbox.php">Gift Box</a>
+
 
                         </div>
 
@@ -213,10 +214,10 @@ if (isset($_SESSION['name'])) {
                 <div class="col-lg-8">
 
                     <?php
-                    $randomNumber = rand(1, 3);
+                    $randomNumber = rand(1, 5);
 
                     $result = mysqli_query($conn, "SELECT * from gift_box where giftbox_id='$randomNumber'"); // Assuming that $conn is the database connection
-                
+                            // check whether if user has more than 5 order for this month
                     if (mysqli_num_rows($result) > 0) {
                         $row = mysqli_fetch_assoc($result); ?>
                                             <h5>More Order ! get chance to win GIFT BOX</h5>

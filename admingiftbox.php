@@ -30,50 +30,51 @@ if (isset($_SESSION['name'])) {
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
         <style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
 
-.flip-card {
-  background-color: transparent;
-  width: 300px;
-  height: 300px;
-  perspective: 1000px;
-}
+            .flip-card {
+                background-color: transparent;
+                width: 300px;
+                height: 300px;
+                perspective: 1000px;
+            }
 
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
+            .flip-card-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                transition: transform 0.6s;
+                transform-style: preserve-3d;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            }
 
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
+            .flip-card:hover .flip-card-inner {
+                transform: rotateY(180deg);
+            }
 
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
+            .flip-card-front,
+            .flip-card-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
 
-.flip-card-front {
-  background-color: #bbb;
-  color: black;
-}
+            .flip-card-front {
+                background-color: #bbb;
+                color: black;
+            }
 
-.flip-card-back {
-  background-color: #2980b9;
-  color: white;
-  transform: rotateY(180deg);
-}
-</style>
+            .flip-card-back {
+                background-color: #2980b9;
+                color: white;
+                transform: rotateY(180deg);
+            }
+        </style>
     </head>
 
     <body>
@@ -149,12 +150,12 @@ body {
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="admincategories.php" class="nav-item nav-link ">Categories</a>
                                 <a href="adminproducts.php" class="nav-item nav-link">Products</a>
-                                <a href="adminorders.php" class="nav-item nav-link active">Orders</a>
+                                <a href="adminorders.php" class="nav-item nav-link ">Orders</a>
                                 <a href="admindelivery.php" class="nav-item nav-link ">Delivery</a>
 
                                 <a href="adminpayment.php" class="nav-item nav-link">Payment</a>
-                                <a href="admincustomers.php" class="nav-item nav-link active">Customers</a>
-                                <a href="admingiftbox.php" class="nav-item nav-link">Gift Boxes</a>
+                                <a href="admincustomers.php" class="nav-item nav-link ">Customers</a>
+                                <a href="admingiftbox.php" class="nav-item nav-link active">Gift Boxes</a>
 
                             </div>
 
@@ -164,27 +165,151 @@ body {
             </div>
         </div>
         <!-- Navbar End -->
+        <div class="container-fluid pt-5 pb-3">
+            
+        <div class="col-lg-8 ml-5">
+                    <!-- <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">Add
+                            Category</span></h5> -->
+                    <form class="signin-form" method='POST' enctype="multipart/form-data">
+                        <div class="bg-secondary p-30 mb-5 p-4">
+                            <div class="row">
+                                <div class="col-md-6 form-group text-light">
+                                    <label>Name</label>
+                                    <input class="form-control" type="text" placeholder="" name='name'>
+                                </div>
+                                <div class="col-md-6 form-group text-light">
+                                    <label>Image</label>
+                                    <input class="form-control" type="file" placeholder="" name='image'>
+                                </div>
+                            </div>
+                            <?php
+                            if (isset($_POST['addgift'])) {
+                                $name = $_POST['name'];
+                                $img = $_FILES["image"]["name"];
+                                $randomNumber = rand(1, 3);
+                                if (!$conn) {
+                                    echo "Server error!";
+                                } else {
+                                    $field1='item'.$randomNumber;
+                                    $field2='image'.$randomNumber;
 
+                                    if ($name != '') {
+                                        $sql1 = "Insert into gift_box  ( $field1, $field2) values ('$name','$img')";
+                                        // print($sql1);
+                                        $res1 = mysqli_query($conn, $sql1);
+                                      
+                                    } else {
+                                        echo "<h5>Something went wrong!</h5>";
+
+                                    }
+
+                                }
+                            }
+                            ?>
+                            <?php
+                            // print($_FILES['image']);
+                            if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+                                // The file was uploaded successfully
+                                $target_dir = "images/"; // Change this to the path of your target directory
+                                $target_file = $target_dir . basename($_FILES["image"]["name"]);
+                                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+                                // Check if the file is an image
+                                $check = getimagesize($_FILES["image"]["tmp_name"]);
+                                if ($check !== false) {
+                                    // Move the uploaded file to the target directory
+                                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                                        echo "The file " . htmlspecialchars(basename($_FILES["image"]["name"])) . " has been uploaded.";
+                                    } else {
+                                        echo "Sorry, there was an error uploading your file.";
+                                    }
+                                } else {
+                                    echo "File is not an image.";
+                                }
+                            }
+                            ?>
+                            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='addgift'>ADD</button>
+                        </div>
+                    </form>
+                    <div class="collapse mb-5" id="shipping-address">
+
+                    </div>
+                </div>
+        </div>
         <!-- Featured Start -->
         <div class="container-fluid pt-5">
             <h1>Gift Boxes Creations</h1>
-            <div class="col-lg-8">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-back">
-                                <img src="./images/giftSample.jpg" alt="Avatar" style="width:300px;height:300px;">
+            <?php
+
+            $set = 1;
+            $result = mysqli_query($conn, "SELECT * from gift_box"); // Assuming that $conn is the database connection
+        
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) { ?>
+                    <h5>SET :
+                        <?php echo $set ?>
+                    </h5>
+
+                    <div class='row'>
+
+                        <div class="flip-card pr-3">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-back">
+                                    <h6>
+                                        <?php echo $row['item1'] ?>
+                                    </h6>
+                                    <img src=<?php echo './images/' . $row['image1'] ?> style="width:300px;height:300px;">
+                                </div>
+                                <div class="flip-card-front">
+                                    <h1>Hey</h1>
+                                    <p>I am here . . .</p>
+                                    <button class='btn btn-sm btn-light'>Open</button>
+                                </div>
                             </div>
-                            <div class="flip-card-front">
-                                <h1>John Doe</h1>
-                                <p>Architect & Engineer</p>
-                                <p>We love that guy</p>
+
+                        </div>
+                        <div class="flip-card pr-3">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-back">
+                                    <h6>
+                                        <?php echo $row['item2'] ?>
+                                    </h6>
+                                    <img src=<?php echo './images/' . $row['image2'] ?> style="width:300px;height:300px;">
+                                </div>
+                                <div class="flip-card-front">
+                                    <h1>Hey</h1>
+                                    <p>No, I am here . . .</p>
+                                    <button class='btn btn-sm btn-light'>Open</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-back">
+                                    <h6>
+                                        <?php echo $row['item3'] ?>
+                                    </h6>
+                                    <img src=<?php echo './images/' . $row['image3'] ?> style="width:300px;height:300px;">
+                                </div>
+                                <div class="flip-card-front">
+                                    <h1>Hey</h1>
+                                    <p>No, No, I am here . . .</p>
+                                    <button class='btn btn-sm btn-light'>Open</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
 
-                <div class="container-fluid pt-5 pb-3"><h5>More More Order ! get chance to win GIFT BOX</h5></div>
+
+                    <?php
+                    $set = $set + 1;
+                }
+            } else {
+                echo "0 results";
+            } ?>
+
+
         </div>
 
         <!-- Footer Start -->
