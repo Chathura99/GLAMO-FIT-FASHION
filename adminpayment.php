@@ -106,7 +106,7 @@ if (isset($_SESSION['name'])) {
                                  <a href="adminproducts.php" class="nav-item nav-link ">Products</a>                                     <a href="adminorders.php" class="nav-item nav-link">Orders</a>
                                 <a href="admindelivery.php" class="nav-item nav-link ">Delivery</a>
 
-                                <a href="adminpayment.php" class="nav-item nav-link">Payment</a>
+                                <a href="adminpayment.php" class="nav-item nav-link active">Payment</a>
                                 <a href="admincustomers.php" class="nav-item nav-link">Customers</a>
                                 <a href="admingiftbox.php" class="nav-item nav-link">Gift Boxes</a>
 
