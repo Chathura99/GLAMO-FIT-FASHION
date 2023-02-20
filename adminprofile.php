@@ -32,8 +32,7 @@ if (isset($_SESSION['name'])) {
     </head>
 
     <body>
-       <!-- Topbar Start -->
-       <div class="container-fluid">
+    <div class="container-fluid">
             <div class="row bg-secondary py-1 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
@@ -41,6 +40,7 @@ if (isset($_SESSION['name'])) {
                 </div>
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
+
                         <a href="./logout.php" style="padding-left:10px">
                             <div class="btn-group">
                                 <button class="btn btn-sm btn-light">LOG OUT</button>
@@ -50,7 +50,7 @@ if (isset($_SESSION['name'])) {
                         <p style="font-size: 16px; margin: 0;padding:0 10px 0 10px;color:black">
                             <?php echo $_SESSION['name'] ?>
                         </p>
-                        <a href="profile.php">
+                        <a href="adminprofile.php">
                             <img src="images/testuser.jpg" alt="Profile Picture"
                                 style="width: 50px; height: 50px; border-radius: 50%;"></a>
                     </div>
@@ -71,19 +71,22 @@ if (isset($_SESSION['name'])) {
             <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
                 <div class="col-lg-4">
                     <a href="" class="text-decoration-none">
-                        <span class="h1 text-uppercase text-dark bg-light px-2">GLAMO</span>
-                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1"> FIT FASHION</span>
+                        <img src="./images/logo.jpg" alt="Avatar" style='border-radius: 50%;width:30%'>
+                        <span class="h3 text-uppercase text-dark bg-light px-2">GLAMO</span>
+                        <span class="h3 text-uppercase text-light bg-primary px-2 ml-n1"> FIT FASHION</span>
                     </a>
                 </div>
                 <div class="col-lg-4 col-6 text-left">
 
                 </div>
                 <a href="" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">ADMIN</span>
+                    <span class="h6 text-uppercase text-light bg-primary px-2 ml-n1">ADMIN</span>
                 </a>
             </div>
         </div>
         <!-- Topbar End -->
+
+
 
 
         <!-- Navbar Start -->

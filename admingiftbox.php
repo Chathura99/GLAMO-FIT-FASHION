@@ -168,8 +168,7 @@ if (isset($_SESSION['name'])) {
         <div class="container-fluid pt-5 pb-3">
             
         <div class="col-lg-8 ml-5">
-                    <!-- <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">Add
-                            Category</span></h5> -->
+        <h5>Gift Boxes Creations</h5>
                     <form class="signin-form" method='POST' enctype="multipart/form-data">
                         <div class="bg-secondary p-30 mb-5 p-4">
                             <div class="row">
@@ -237,8 +236,8 @@ if (isset($_SESSION['name'])) {
                 </div>
         </div>
         <!-- Featured Start -->
-        <div class="container-fluid pt-5">
-            <h1>Gift Boxes Creations</h1>
+        <div class="container-fluid pt-5 ml-5">
+            
             <?php
 
             $set = 1;
