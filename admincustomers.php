@@ -43,11 +43,8 @@ if (isset($_SESSION['name'])) {
                     <div class="d-inline-flex align-items-center">
 
                         <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift Box</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">Gift Voucher</button>
+                                                        <button type="button" class="btn btn-sm btn-light" data-toggle="dropdown">Gift Box</button>
 
-                            </div>
                         </div>
 
 
@@ -120,6 +117,8 @@ if (isset($_SESSION['name'])) {
 
                                 <a href="adminpayment.php" class="nav-item nav-link">Payment</a> <a href="admincustomers.php"
                                     class="nav-item nav-link active">Customers</a>
+                                    <a href="admingiftbox.php" class="nav-item nav-link">Gift Boxes</a>
+
 
                             </div>
                            

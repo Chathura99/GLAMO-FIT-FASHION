@@ -43,11 +43,8 @@ if (isset($_SESSION['name'])) {
                     <div class="d-inline-flex align-items-center">
 
                         <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gift Box</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">Gift Voucher</button>
-
-                            </div>
+                            <a href="giftbox.php">Gift Box</a>
+                            
                         </div>
 
 

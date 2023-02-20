@@ -29,6 +29,51 @@ if (isset($_SESSION['name'])) {
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 300px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg);
+}
+</style>
     </head>
 
     <body>
@@ -40,7 +85,7 @@ if (isset($_SESSION['name'])) {
                     </div>
                 </div>
                 <div class="col-lg-6 text-center text-lg-right">
-                    <div class="d-inline-flex align-items-center">          
+                    <div class="d-inline-flex align-items-center">
 
                         <a href="./logout.php" style="padding-left:10px">
                             <div class="btn-group">
@@ -52,8 +97,8 @@ if (isset($_SESSION['name'])) {
                             <?php echo $_SESSION['name'] ?>
                         </p>
                         <a href="adminprofile.php">
-                        <img src="images/testuser.jpg" alt="Profile Picture"
-                            style="width: 50px; height: 50px; border-radius: 50%;"></a>
+                            <img src="images/testuser.jpg" alt="Profile Picture"
+                                style="width: 50px; height: 50px; border-radius: 50%;"></a>
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -72,7 +117,7 @@ if (isset($_SESSION['name'])) {
             <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
                 <div class="col-lg-4">
                     <a href="" class="text-decoration-none">
-                    <img src="./images/logo.jpg" alt="Avatar" style='border-radius: 50%;width:30%'>
+                        <img src="./images/logo.jpg" alt="Avatar" style='border-radius: 50%;width:30%'>
                         <span class="h3 text-uppercase text-dark bg-light px-2">GLAMO</span>
                         <span class="h3 text-uppercase text-light bg-primary px-2 ml-n1"> FIT FASHION</span>
                     </a>
@@ -102,17 +147,17 @@ if (isset($_SESSION['name'])) {
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                 <a href="admincategories.php" class="nav-item nav-link ">Categories</a>
-                                 <a href="adminproducts.php" class="nav-item nav-link">Products</a>
+                                <a href="admincategories.php" class="nav-item nav-link ">Categories</a>
+                                <a href="adminproducts.php" class="nav-item nav-link">Products</a>
                                 <a href="adminorders.php" class="nav-item nav-link active">Orders</a>
                                 <a href="admindelivery.php" class="nav-item nav-link ">Delivery</a>
 
                                 <a href="adminpayment.php" class="nav-item nav-link">Payment</a>
-                                <a href="admincustomers.php" class="nav-item nav-link">Customers</a>
+                                <a href="admincustomers.php" class="nav-item nav-link active">Customers</a>
                                 <a href="admingiftbox.php" class="nav-item nav-link">Gift Boxes</a>
 
                             </div>
-                          
+
                         </div>
                     </nav>
                 </div>
@@ -122,130 +167,25 @@ if (isset($_SESSION['name'])) {
 
         <!-- Featured Start -->
         <div class="container-fluid pt-5">
-        <h1>New Orders</h1>
-        <div class="row px-xl-5">
-            <div class="col-lg-8 table-responsive mb-5">
-                    <table class="table table-light table-borderless table-hover text-center mb-0">
-                        <thead class="thead-dark">
-                            <tr>
-                                                                                  
-                            <th>Order ID</th>
-                                <th>Name</th>
-                                <th>Total Price</th>
-                                <th>Status</th>
-                                <th>Date</th> 
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="align-middle">
-                           
-                            <?php
-                            $userID = $_SESSION['userId'];
-                            $result = mysqli_query($conn, "SELECT *
-                            FROM orders where status='pending'"); // Assuming that $conn is the database connection
-                        
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) { ?>
-
-                                    
-                                <tr>
-                                <td class="align-middle"><?php echo $row["order_id"]; ?></td>
-                                <td class="align-middle"><?php echo $row["name"]; ?></td>
-                                <td class="align-middle"><?php echo 'LKR '.$row["total_price"]; ?></td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <input type="text"
-                                            class="form-control form-control-sm bg-secondary border-0 text-center" value= <?php echo $row["status"]; ?>
-                                            disabled>
-                                    </div>
-                                </td>
-                                <td class="align-middle"><?php echo $row["date"]; ?></td>
-                                <td class="align-middle"><a href='adminorders.php?orderIdd=<?php echo $row["order_id"]; ?>'><button class="btn btn-sm btn-danger p-2" ><i
-                                            class="fas fa-arrow-right"></i></button></a></td>
-                            </tr>
-
-                                <?php
-                                }
-                            } else {
-                                echo "0 results";
-                            } ?>
-
-                            <tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-lg-4">
-                <h6 class="text-white text-uppercase">Order Details</h6>
-
-                    <div class="product-offer mb-30" style="height: 200px;">
-                    <div class="list-group">
-                <?php
-                
-                 if(isset($_GET['orderIdd'])){$orserIdd=$_GET['orderIdd'];
-                $result = mysqli_query($conn, "SELECT *
-                FROM orders  inner join order_products on order_products.order_id=orders.order_id inner join product on product.product_id=order_products.product_id where orders.order_id=$orserIdd;
-                -- INNER JOIN customer ON users.id = customer.user_id where type='user'
-                "); // Assuming that $conn is the database connection
-                $first=true;
-                if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) { ?>
-
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <?php if($first==true){ ?>    
-                        <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">
-                                    <?php echo 'By :'.$row["name"]; ?>
-                                </h5>
-                                <small class="text-muted">
-                                    <?php echo 'LKR ' . $row["total_price"]; ?>
-                                </small>
+            <h1>Gift Boxes Creations</h1>
+            <div class="col-lg-8">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-back">
+                                <img src="./images/giftSample.jpg" alt="Avatar" style="width:300px;height:300px;">
                             </div>
-                            <p class="mb-1">
-                                <?php echo $row["date"]; ?>
-                            </p>
-                            <?php } ?>
-                            <p class="mb-1">
-                                <?php echo $row["product_name"]; ?>
-                            </p>
-                            <h6><?php echo '('.$row["quantity"].') Items'; ?>
-                        </h6>
-                           
-                        </a>
-                        <?php
-                                                $first=false;
-
-                    }
-                } else {
-                    echo '<p>No Items</p>';
-                } }else{
-                    echo '<p>Please select order first!</p>';}?>
-
-            </div>
-            <!-- change the status -->
-            <form method="post">
-    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='posted'>Posted</button>
-</form>
-<?php
-// Assuming you have already established a database connection
-
-if(isset($_POST['posted'])){
-    if(isset($_GET['orderIdd'])){$orserIdd=$_GET['orderIdd'];}
-    $sql = "UPDATE orders SET status='posting' WHERE order_id=$orserIdd";
-    if(mysqli_query($conn, $sql)){
-        echo "Status updated successfully";
-    } else {
-        echo "Error updating status: " . mysqli_error($conn);
-    }
-}
-?>
+                            <div class="flip-card-front">
+                                <h1>John Doe</h1>
+                                <p>Architect & Engineer</p>
+                                <p>We love that guy</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                        </div>
-                
-          
+
+
+                <div class="container-fluid pt-5 pb-3"><h5>More More Order ! get chance to win GIFT BOX</h5></div>
         </div>
-        <!-- Featured End -->
-            </br></br></br></br></br></br></br></br></br>
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
@@ -270,7 +210,7 @@ if(isset($_POST['posted'])){
                                 <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
-            
+
                         <div class="col-md-4 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">SUBSCRIBE</h5>
                             <p>Sign up to the lates news and offers</p>

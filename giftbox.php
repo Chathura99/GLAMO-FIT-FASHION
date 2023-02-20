@@ -8,13 +8,13 @@ if (isset($_SESSION['name'])) {
 
     <head>
         <meta charset="utf-8">
-        <title>GLAMO FIT FASHION</title>
+        <title>Glamo Fit Fashion - Online Shop Website </title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/logo.jpg" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -29,6 +29,52 @@ if (isset($_SESSION['name'])) {
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .flip-card {
+                background-color: transparent;
+                width: 300px;
+                height: 300px;
+                perspective: 1000px;
+            }
+
+            .flip-card-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                transition: transform 0.6s;
+                transform-style: preserve-3d;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            .flip-card:hover .flip-card-inner {
+                transform: rotateY(180deg);
+            }
+
+            .flip-card-front,
+            .flip-card-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
+
+            .flip-card-front {
+                background-color: #bbb;
+                color: black;
+            }
+
+            .flip-card-back {
+                background-color: #2980b9;
+                color: white;
+                transform: rotateY(180deg);
+            }
+        </style>
     </head>
 
     <body>
@@ -43,7 +89,7 @@ if (isset($_SESSION['name'])) {
                     <div class="d-inline-flex align-items-center">
 
                         <div class="btn-group mx-2">
-                                                        <button type="button" class="btn btn-sm btn-light" data-toggle="dropdown">Gift Box</button>
+                            <button type="button" class="btn btn-sm btn-light" data-toggle="dropdown">Gift Box</button>
 
                         </div>
 
@@ -58,8 +104,9 @@ if (isset($_SESSION['name'])) {
                             <?php echo $_SESSION['name'] ?>
                         </p>
                         <a href="profile.php">
-                            <img src="images/testuser.jpg" alt="Profile Picture"
-                                style="width: 50px; height: 50px; border-radius: 50%;"></a>
+                            <a href="profile.php">
+                                <img src="images/testuser.jpg" alt="Profile Picture"
+                                    style="width: 50px; height: 50px; border-radius: 50%;"></a></a>
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -75,11 +122,11 @@ if (isset($_SESSION['name'])) {
                     </div>
                 </div>
             </div>
-          
+
             <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
                 <div class="col-lg-4">
                     <a href="" class="text-decoration-none">
-                    <img src="./images/logo.jpg" alt="Avatar" style='border-radius: 50%;width:30%'>
+                        <img src="./images/logo.jpg" alt="Avatar" style='border-radius: 50%;width:30%'>
                         <span class="h3 text-uppercase text-dark bg-light px-2">GLAMO</span>
                         <span class="h3 text-uppercase text-light bg-primary px-2 ml-n1"> FIT FASHION</span>
                     </a>
@@ -87,12 +134,13 @@ if (isset($_SESSION['name'])) {
                 <div class="col-lg-4 col-6 text-left">
 
                 </div>
-                   <div class="col-lg-4 col-6 text-right">
+                <div class="col-lg-4 col-6 text-right">
                     <p class="m-0">Customer Service</p>
                     <h5 class="m-0">076- 4272434</h5>
                 </div>
 
             </div>
+
         </div>
         <!-- Topbar End -->
 
@@ -114,7 +162,10 @@ if (isset($_SESSION['name'])) {
                         
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    echo '<a href="" class="nav-item nav-link pl-3">' . $row["category_name"] . '</a>';
+                                    $cat = $row["category_id"];
+                                    ?>
+                                    <a class="nav-item nav-link pl-3" href='index.php?catId=<?php echo $cat; ?>'><?php echo $row["category_name"]; ?></a>
+                                    <?php
                                 }
                             } else {
                                 echo "0 results";
@@ -135,8 +186,8 @@ if (isset($_SESSION['name'])) {
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="index.php" class="nav-item nav-link">Home</a>
                                 <a href="shop.php" class="nav-item nav-link">Shop</a>
-                                <a href="cart.php" class="nav-item nav-link ">Shopping Cart</a>
-                                <a href="checkout.php" class="nav-item nav-link ">Order</a>
+                                <a href="cart.php" class="nav-item nav-link">Shopping Cart</a>
+                                <a href="checkout.php" class="nav-item nav-link">Order</a>
 
                                 <a href="contact.php" class="nav-item nav-link">Contact</a>
                             </div>
@@ -145,7 +196,7 @@ if (isset($_SESSION['name'])) {
                                 <a href="" class="btn px-0 ml-3">
                                     <a href="notification.php"><i class="fas fa-bell text-primary"></i></a>
                                     <span class="badge text-secondary border border-secondary rounded-circle"
-                                        style="padding-bottom: 2px;">0</span>
+                                        style="padding-bottom: 2px;">10</span>
                                 </a>
                             </div>
                         </div>
@@ -155,78 +206,86 @@ if (isset($_SESSION['name'])) {
         </div>
         <!-- Navbar End -->
 
-
-
-        <!-- Breadcrumb Start -->
-        <div class="container-fluid">
+        </br>
+        <!-- Carousel Start -->
+        <div class="container-fluid mb-3">
             <div class="row px-xl-5">
-                <div class="col-12">
-                    <nav class="breadcrumb bg-light mb-30">
-                        <a class="breadcrumb-item text-dark" href="#">Home</a>
-                        <span class="breadcrumb-item active">Profile</span>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <!-- Breadcrumb End -->
+                <div class="col-lg-8">
 
+                    <?php
+                    $randomNumber = rand(1, 3);
 
-        <!-- Order Start -->
-        <div class="container-fluid">
-            <div class="row px-xl-5">
-                <?php
-                $user_id = $_SESSION['userId'];
-                $result = mysqli_query($conn, "SELECT *
-                FROM users
-                INNER JOIN customer ON users.id = customer.user_id where id='$user_id'"); // Assuming that $conn is the database connection
-            
-                if (mysqli_num_rows($result) > 0) {
-                   
-                                
+                    $result = mysqli_query($conn, "SELECT * from gift_box where giftbox_id='$randomNumber'"); // Assuming that $conn is the database connection
                 
-                    while ($row = mysqli_fetch_assoc($result)) { ?>
-                        <div class="col-lg-8">
-                            <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">User
-                                    Profile</span></h5>
-                            <div class="bg-secondary p-30 mb-5 p-4">
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label class='text-light'>Name</label>
-                                        <input class="form-control" type="text" placeholder="" value=<?php echo $row["name"]; ?>>
-                                    </div>
-                                   
-                                    <div class="col-md-6 form-group">
-                                        <label class='text-light'>E-mail</label>
-                                        <input class="form-control" type="text" placeholder="" value=<?php echo $row["email"]?>>
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <label class='text-light'>Mobile No</label>
-                                        <input class="form-control" type="text" placeholder="" value=<?php echo $row["Telephone"]?>>
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <label class='text-light'>Address</label>
-                                        <input class="form-control" type="text" placeholder="" value=<?php echo $row["address"]?>>
-                                    </div>
-                                    
-                                
-                            
-                                    <div class="col-md-6 form-group">
-                                        <label class='text-light'>ZIP Code</label>
-                                        <input class="form-control" type="text" placeholder="" value=<?php echo $row["zip_code"]?>>
-                                    </div>
-                                    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" name='updateUser'>Update</button>
+                    if (mysqli_num_rows($result) > 0) {
+                        $row = mysqli_fetch_assoc($result); ?>
+                                            <h5>More Order ! get chance to win GIFT BOX</h5>
 
+                        <div class='row'>
+
+                            <div class="flip-card pr-3">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-back">
+                                        <h6>
+                                            <?php echo $row['item1'] ?>
+                                        </h6>
+                                        <img src=<?php echo './images/'.$row['image1'] ?> style="width:300px;height:300px;">
+                                    </div>
+                                    <div class="flip-card-front">
+                                        <h1>Hey</h1>
+                                        <p>I am here . . .</p>
+                                        <button class='btn btn-sm btn-light'>Open</button>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="flip-card pr-3">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-back">
+                                        <h6>
+                                            <?php echo $row['item2'] ?>
+                                        </h6>
+                                        <img src=<?php echo './images/'.$row['image2'] ?> style="width:300px;height:300px;">
+                                    </div>
+                                    <div class="flip-card-front">
+                                        <h1>Hey</h1>
+                                        <p>No, I am here . . .</p>
+                                        <button class='btn btn-sm btn-light'>Open</button>
+                                    </div>
                                 </div>
                             </div>
-                            
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-back">
+                                        <h6>
+                                            <?php echo $row['item3'] ?>
+                                        </h6>
+                                        <img src=<?php echo './images/'.$row['image3'] ?>  style="width:300px;height:300px;">
+                                    </div>
+                                    <div class="flip-card-front">
+                                        <h1>Hey</h1>
+                                        <p>No, No, I am here . . .</p>
+                                        <button class='btn btn-sm btn-light'>Open</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
 
+
                         <?php
-                    }
-                } else {
-                    echo "0 results";
-                } ?>
+
+                    } else {
+                        echo "0 results";
+                    } ?>
+
+                </div>
+
+
+                <div class="container-fluid pt-5 pb-3">
+                <button class='btn btn-l btn-light'>Claim Now</button><br>
+                </div>
+
 
 
                 <!-- Footer Start -->
@@ -257,7 +316,7 @@ if (isset($_SESSION['name'])) {
                                             Us</a>
                                     </div>
                                 </div>
-                               
+
                                 <div class="col-md-4 mb-5">
                                     <h5 class="text-secondary text-uppercase mb-4">SUBSCRIBE</h5>
                                     <p>Sign up to the lates news and offers</p>
@@ -287,6 +346,8 @@ if (isset($_SESSION['name'])) {
                         <div class="col-md-6 px-xl-0">
                             <p class="mb-md-0 text-center text-md-left text-secondary">
 
+
+                            </p>
                         </div>
                         <div class="col-md-6 px-xl-0 text-center text-md-right">
                             <img class="img-fluid" src="img/payments.png" alt="">
@@ -313,6 +374,25 @@ if (isset($_SESSION['name'])) {
                 <!-- Template Javascript -->
                 <script src="js/main.js"></script>
     </body>
+    <script type="text/javascript">
+        function incrementValue(id) {
+            var value = parseInt(document.getElementById(id).value, 10);
+            value = isNaN(value) ? 0 : value;
+            if (value < 10) {
+                value++;
+                document.getElementById(id).value = value;
+            }
+        }
+        function decrementValue(id) {
+            var value = parseInt(document.getElementById(id).value, 10);
+            value = isNaN(value) ? 0 : value;
+            if (value > 1) {
+                value--;
+                document.getElementById(id).value = value;
+            }
+
+        }
+    </script>
 
     </html>
     <?php
