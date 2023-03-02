@@ -214,13 +214,18 @@ if (isset($_SESSION['name'])) {
                 <div class="col-lg-8">
 
                     <?php
+                    $userID = $_SESSION['userId'];
                     $randomNumber = rand(1, 5);
-
+                    $res = mysqli_fetch_assoc(mysqli_query($conn, "SELECT count(*) as count from orders
+                    inner join customer on customer.customer_id=orders.customer_id
+                    inner join users on customer.user_id=users.id where users.id='$userID'"));
+                    // print($res['count']);
                     $result = mysqli_query($conn, "SELECT * from gift_box where giftbox_id='$randomNumber'"); // Assuming that $conn is the database connection
-                            // check whether if user has %5 == 0 orders
-                    if (mysqli_num_rows($result) > 0) {
+                    // check whether if user has %5 == 0 orders
+                
+                    if (mysqli_num_rows($result) > 0 && $res['count'] % 5 == 0) {
                         $row = mysqli_fetch_assoc($result); ?>
-                                            <h5>More Order ! get chance to win GIFT BOX</h5>
+                        <h5>More Order ! get chance to win GIFT BOX</h5>
 
                         <div class='row'>
 
@@ -230,7 +235,7 @@ if (isset($_SESSION['name'])) {
                                         <h6>
                                             <?php echo $row['item1'] ?>
                                         </h6>
-                                        <img src=<?php echo './images/'.$row['image1'] ?> style="width:300px;height:300px;">
+                                        <img src=<?php echo './images/' . $row['image1'] ?> style="width:300px;height:300px;">
                                     </div>
                                     <div class="flip-card-front">
                                         <h1>Hey</h1>
@@ -238,7 +243,7 @@ if (isset($_SESSION['name'])) {
                                         <button class='btn btn-sm btn-light'>Open</button>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="flip-card pr-3">
                                 <div class="flip-card-inner">
@@ -246,7 +251,7 @@ if (isset($_SESSION['name'])) {
                                         <h6>
                                             <?php echo $row['item2'] ?>
                                         </h6>
-                                        <img src=<?php echo './images/'.$row['image2'] ?> style="width:300px;height:300px;">
+                                        <img src=<?php echo './images/' . $row['image2'] ?> style="width:300px;height:300px;">
                                     </div>
                                     <div class="flip-card-front">
                                         <h1>Hey</h1>
@@ -261,7 +266,7 @@ if (isset($_SESSION['name'])) {
                                         <h6>
                                             <?php echo $row['item3'] ?>
                                         </h6>
-                                        <img src=<?php echo './images/'.$row['image3'] ?>  style="width:300px;height:300px;">
+                                        <img src=<?php echo './images/' . $row['image3'] ?> style="width:300px;height:300px;">
                                     </div>
                                     <div class="flip-card-front">
                                         <h1>Hey</h1>
@@ -271,21 +276,22 @@ if (isset($_SESSION['name'])) {
                                 </div>
                             </div>
                         </div>
+                        <div class="container-fluid pt-5 pb-3">
+                            <button class='btn btn-l btn-light'>Claim Now</button><br>
+                        </div>
 
 
 
                         <?php
 
                     } else {
-                        echo "0 results";
+                        echo "<h4>You have not available gift boxes yet!</br>Make your orders Now!!!\nHurry Up</h4>";
                     } ?>
 
                 </div>
 
 
-                <div class="container-fluid pt-5 pb-3">
-                <button class='btn btn-l btn-light'>Claim Now</button><br>
-                </div>
+
 
 
 
