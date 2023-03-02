@@ -150,12 +150,12 @@ if (isset($_SESSION['name'])) {
                                 <div class="row">
                                     <div class="col-md-6 form-group text-light">
                                         <label>Item Name</label>
-                                        <input class="form-control" type="text" placeholder="" name='name' value=<?php echo $row['product_name']?>>
+                                        <input class="form-control" type="text" placeholder="" name='name' value="<?php echo $row['product_name']?>">
                                     </div>
                                     
                                     <div class="col-md-6 form-group text-light">
                                         <label>Item Description</label>
-                                        <input class="form-control" type="text" placeholder="" name='description' value=<?php echo $row['description']?>>
+                                        <input class="form-control" type="text" placeholder="" name='description' value="<?php echo $row['description']?>">
                                     </div>
                                     <div class="col-md-6 form-group text-light">
                                         <label>Quantity</label>

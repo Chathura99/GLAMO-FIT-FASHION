@@ -149,15 +149,14 @@ if (isset($_SESSION['name'])) {
                                 $row = mysqli_fetch_assoc($currentdata);
 
                                 ?>
-                               
                                 <div class="row">
                                     <div class="col-md-6 form-group text-light">
                                         <label>Category Name</label>
-                                        <input class="form-control" type="text" placeholder="" name='name' value=<?php echo $row['category_name'] ?>>
+                                        <input class="form-control" type="text" placeholder="" name='name' value="<?php echo $row['category_name'] ?>">
                                     </div>
                                     <div class="col-md-6 form-group text-light">
                                         <label>Category Description</label>
-                                        <input class="form-control" type="text" placeholder="" name='description' value=<?php echo $row['description'] ?>>
+                                        <input class="form-control" type="text" placeholder="" name='description' value="<?php echo $row['description'] ?>">
                                     </div>
                                     <div class="col-md-6 form-group text-light">
                                         <label>Image</label>

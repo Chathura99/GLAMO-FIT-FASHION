@@ -217,7 +217,7 @@ if (isset($_SESSION['name'])) {
                     $randomNumber = rand(1, 5);
 
                     $result = mysqli_query($conn, "SELECT * from gift_box where giftbox_id='$randomNumber'"); // Assuming that $conn is the database connection
-                            // check whether if user has more than 5 order for this month
+                            // check whether if user has %5 == 0 orders
                     if (mysqli_num_rows($result) > 0) {
                         $row = mysqli_fetch_assoc($result); ?>
                                             <h5>More Order ! get chance to win GIFT BOX</h5>

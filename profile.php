@@ -206,7 +206,7 @@ if (isset($_SESSION['name'])) {
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <label class='text-light'>Address</label>
-                                        <input class="form-control" type="text" placeholder="" value=<?php echo $row["address"]?>>
+                                        <input class="form-control" type="text" placeholder="" value="<?php echo $row["address"]?>">
                                     </div>
                                     
                                 
